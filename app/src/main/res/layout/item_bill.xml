@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginTop="7dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_margin="7dp"
+        app:cardElevation="5dp"
+        cardview:cardCornerRadius="15dp"
+        app:cardBackgroundColor="@color/backGroundBillCardView">
+
+        <LinearLayout
+            android:id="@+id/borderCardView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/border_unpay_cardview">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.20">
+
+                <androidx.percentlayout.widget.PercentRelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txt_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_heightPercent="12%"
+                        app:layout_widthPercent="100%" />
+
+                    <TextView
+                        android:id="@+id/txtRoomNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/txt_1"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/back_ground_room_bill_item"
+                        android:gravity="center"
+                        android:text="ROOM 101"
+                        android:textColor="@color/white"
+                        app:layout_heightPercent="50%"
+                        app:layout_widthPercent="50%" />
+
+                    <TextView
+                        android:id="@+id/txt_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/txtRoomNumber"
+                        app:layout_heightPercent="3%"
+                        app:layout_widthPercent="100%" />
+
+                    <TextView
+                        android:id="@+id/txtApartment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/txt_2"
+                        android:layout_centerHorizontal="true"
+                        app:layout_heightPercent="30%"
+                        app:layout_widthPercent="70%"
+                        android:gravity="center"
+                        android:textSize="10sp"
+                        android:text="Chung cu The Peak"/>
+
+                </androidx.percentlayout.widget.PercentRelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.40"
+                android:layout_marginStart="5dp">
+
+                <androidx.percentlayout.widget.PercentRelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txtBillCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_widthPercent="100%"
+                        app:layout_heightPercent="20%"
+                        android:text="Code: Bill Code"
+                        android:gravity="center_vertical"/>
+                    <TextView
+                        android:id="@+id/txtBillType"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/txtBillCode"
+                        app:layout_widthPercent="100%"
+                        app:layout_heightPercent="20%"
+                        android:text="Type: Bill Type"
+                        android:gravity="center_vertical"/>
+
+                    <TextView
+                        android:id="@+id/txtDateExpired"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/txtBillType"
+                        app:layout_widthPercent="100%"
+                        app:layout_heightPercent="20%"
+                        android:text="Date Expired: 06/07/2019"
+                        android:gravity="center_vertical"/>
+
+                    <TextView
+                        android:id="@+id/txtBillTotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/txtDateExpired"
+                        app:layout_widthPercent="100%"
+                        app:layout_heightPercent="20%"
+                        android:text="Total: 100,000 VND"
+                        android:gravity="center_vertical"/>
+
+                </androidx.percentlayout.widget.PercentRelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

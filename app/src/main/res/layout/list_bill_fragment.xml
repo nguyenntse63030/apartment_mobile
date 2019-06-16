@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<androidx.recyclerview.widget.RecyclerView-->
+        <!--android:id="@+id/listBillRecyclerView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/colorAccent">-->
+
+    <!--</androidx.recyclerview.widget.RecyclerView>-->
+
+    <androidx.percentlayout.widget.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/txtUnpayBill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="55%"
+            app:layout_heightPercent="7%"
+            android:text="Unpay Bill"
+            android:textSize="25dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:elevation="5dp"
+            android:background="@drawable/back_ground_bill_on_select"/>
+
+
+        <TextView
+            android:id="@+id/txtPaidBill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="55%"
+            app:layout_heightPercent="7%"
+            android:text="Paid Bill"
+            android:textSize="25dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/back_ground_bill_not_select"/>
+
+    </androidx.percentlayout.widget.PercentRelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/unpay_paid_bill_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+</LinearLayout>
