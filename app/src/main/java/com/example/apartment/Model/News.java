@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class News implements Serializable {
     String newsTitle;
-    String newsContent;
+    String newsDescription;
     String newsContentDetail;
     String dateOfNews;
     int newsImage;
 
-    public News(String newsTitle, String newsContent, int newsImage, String dateOfNews, String newsContentDetail) {
+    public News(String newsTitle, String newsDescription, int newsImage, String dateOfNews, String newsContentDetail) {
         this.newsTitle = newsTitle;
-        this.newsContent = newsContent;
+        this.newsDescription = newsDescription;
         this.newsContentDetail = newsContentDetail;
         this.dateOfNews = dateOfNews;
         this.newsImage = newsImage;
@@ -28,8 +28,8 @@ public class News implements Serializable {
         return newsTitle;
     }
 
-    public String getNewsContent() {
-        return newsContent;
+    public String getNewsDescription() {
+        return newsDescription;
     }
 
     public String getNewsContentDetail() {

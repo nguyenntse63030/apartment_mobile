@@ -1,10 +1,10 @@
 package com.example.apartment.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.apartment.Activity.NewsDetailActivity;
 import com.example.apartment.Adapter.ListNewsFragmentAdapter;
 import com.example.apartment.Contract.ListNewsFragmentContract;
 import com.example.apartment.Listener.List_News_Listener;
@@ -19,6 +20,8 @@ import com.example.apartment.Model.News;
 import com.example.apartment.Presenter.ListNewsFragmentAdapterPresenterImpl;
 import com.example.apartment.Presenter.ListNewsFragmentPresenterImpl;
 import com.example.apartment.R;
+
+import java.io.Serializable;
 
 public class ListNewsFragment extends Fragment implements ListNewsFragmentContract.listNewsFragmentView, List_News_Listener {
     private RecyclerView recyclerView;
@@ -46,7 +49,10 @@ public class ListNewsFragment extends Fragment implements ListNewsFragmentContra
 
     @Override
     public void onClickNewsItem(News news) {
-        Toast.makeText(getContext(), news.getNewsTitle(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getContext(), NewsDetailActivity.class);
+        intent.putExtra("news", (Serializable) news);
+        startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     @Override

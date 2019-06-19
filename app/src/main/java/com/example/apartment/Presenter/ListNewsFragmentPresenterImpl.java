@@ -4,7 +4,6 @@ package com.example.apartment.Presenter;
 import com.example.apartment.Contract.ListNewsFragmentContract;
 import com.example.apartment.Listener.List_News_Listener;
 import com.example.apartment.Model.News;
-import com.example.apartment.Presenter.ListNewsFragmentAdapterPresenterImpl;
 import com.example.apartment.R;
 
 import java.util.ArrayList;
