@@ -14,9 +14,7 @@
         android:orientation="vertical"
         android:foreground="?android:attr/selectableItemBackground"
         android:layout_margin="7dp"
-        app:cardElevation="5dp"
-        cardview:cardCornerRadius="15dp"
-        app:cardBackgroundColor="@color/backGroundBillCardView">
+        cardview:cardCornerRadius="15dp">
 
         <LinearLayout
             android:id="@+id/borderCardView"

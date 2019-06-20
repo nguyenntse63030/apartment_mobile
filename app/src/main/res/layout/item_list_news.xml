@@ -24,21 +24,21 @@
             android:layout_height="match_parent"
             android:background="@drawable/border_news_item">
 
-            <RelativeLayout
-                android:id="@+id/layoutImageNews"
-                android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_height="175dp">
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/layoutImageNews"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_height="175dp">-->
 
                 <ImageView
                     android:id="@+id/newsImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="175dp"
                     android:src="@drawable/album1"
                     android:layout_centerInParent="true"
                     android:scaleType="fitXY"/>
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
             <TextView
                 android:id="@+id/txtDateOfNews"
