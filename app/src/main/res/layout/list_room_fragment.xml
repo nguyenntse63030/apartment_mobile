@@ -5,22 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<androidx.recyclerview.widget.RecyclerView-->
-        <!--android:id="@+id/listRoomRecyclerView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/colorPrimary">-->
-
-    <!--</androidx.recyclerview.widget.RecyclerView>-->
-    <TextView
-        android:id="@+id/txtHomeTitle"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listRoomRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Room"
-        android:textSize="25dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:background="@color/backGroundTaskbar"/>
+        android:background="@color/colorPrimary">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

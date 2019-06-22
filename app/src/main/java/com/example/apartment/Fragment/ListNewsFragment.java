@@ -23,7 +23,7 @@ import com.example.apartment.R;
 public class ListNewsFragment extends Fragment implements ListNewsFragmentContract.listNewsFragmentView, List_News_Listener {
     private RecyclerView recyclerView;
     private ListNewsFragmentAdapter adapter;
-    private ListNewsFragmentPresenterImpl presenter;
+    private ListNewsFragmentContract.listNewsFragmentPresenter presenter;
 
 
     @Override

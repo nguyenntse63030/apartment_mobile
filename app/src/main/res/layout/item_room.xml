@@ -3,10 +3,7 @@
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:layout_marginStart="5dp"
-    android:layout_marginEnd="5dp"
-    android:layout_marginTop="7dp">
+    android:layout_height="170dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -23,8 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:weightSum="6"
-            android:background="@drawable/border_unpay_cardview">
+            android:weightSum="6">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -35,17 +31,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-
                     <TextView
-                        android:id="@+id/txtRoomNumber"
+                        android:id="@+id/lbRoomNumber"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:layout_below="@+id/txt_1"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/back_ground_room_bill_item"
                         android:gravity="center"
-                        android:text="101"
-                        android:layout_marginTop="10dp"
+                        android:text="100"
                         android:textColor="@color/white" />
 
 
@@ -53,9 +47,9 @@
                         android:id="@+id/txtApartment"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:layout_below="@+id/txtRoomNumber"
+                        android:layout_below="@+id/lbRoomNumber"
                         android:layout_centerHorizontal="true"
-                        app:layout_widthPercent="90%"
+                        app:layout_widthPercent="70%"
                         android:gravity="center"
                         android:textSize="15dp"
                         android:text="Chung cu The Peak"/>
@@ -66,46 +60,63 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4">
+                android:layout_weight="4"
+                android:paddingStart="5dp">
 
                 <androidx.percentlayout.widget.PercentRelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingStart="5dp">
+                    android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/txtBillCode"
+                        android:id="@+id/txtRoomID"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        app:layout_widthPercent="100%"
+                        android:layout_height="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="Code: Bill Code"
+                        android:text="Room ID:ABCD "
+
                         android:gravity="center_vertical"/>
                     <TextView
-                        android:id="@+id/txtBillType"
+                        android:id="@+id/txtRoomNumber"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_below="@+id/txtBillCode"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtRoomID"
                         app:layout_widthPercent="100%"
-                        android:text="Type: Bill Type"
+                        android:text="Room number: 100"
                         android:gravity="center_vertical"/>
 
                     <TextView
-                        android:id="@+id/txtDateExpired"
+                        android:id="@+id/txtSignDate"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_below="@+id/txtBillType"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtRoomNumber"
                         app:layout_widthPercent="100%"
-                        android:text="Date Expired: 06/07/2019"
+                        android:text="Sign date: 06/07/2019"
                         android:gravity="center_vertical"/>
 
                     <TextView
-                        android:id="@+id/txtBillTotal"
+                        android:id="@+id/txtDistrict"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_below="@+id/txtDateExpired"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtSignDate"
                         app:layout_widthPercent="100%"
-                        android:text="Total: 100,000 VND"
+                        android:text="District: Quan 12"
+                        android:gravity="center_vertical"/>
+                    <TextView
+                        android:id="@+id/txtAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtDistrict"
+                        app:layout_widthPercent="100%"
+                        android:text="Address: 394/102 kp1 phuong trung mi tay"
+                        android:gravity="center_vertical"/>
+                    <TextView
+                        android:id="@+id/txtUnpayBillNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtAddress"
+                        app:layout_widthPercent="100%"
+                        android:text="Unpay bill: 1"
+                        android:textStyle="bold"
                         android:gravity="center_vertical"/>
 
                 </androidx.percentlayout.widget.PercentRelativeLayout>
