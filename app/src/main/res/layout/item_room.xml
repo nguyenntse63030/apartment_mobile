@@ -3,7 +3,9 @@
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="170dp">
+    android:layout_height="170dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -11,7 +13,6 @@
         android:orientation="vertical"
         android:foreground="?android:attr/selectableItemBackground"
         android:layout_margin="7dp"
-        app:cardElevation="5dp"
         cardview:cardCornerRadius="15dp"
         app:cardBackgroundColor="@color/backGroundBillCardView">
 
@@ -20,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:weightSum="6">
+            android:weightSum="6"
+            android:background="@drawable/border_paidbill_cardview">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -36,7 +38,7 @@
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="15dp"
                         android:background="@drawable/back_ground_room_bill_item"
                         android:gravity="center"
                         android:text="100"
