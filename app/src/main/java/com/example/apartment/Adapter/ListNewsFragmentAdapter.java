@@ -45,13 +45,13 @@ public class ListNewsFragmentAdapter extends RecyclerView.Adapter<ListNewsFragme
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         private ImageView newsImage;
-        private TextView txtNewsTitle, txtNewsContent, txtDateOfNews;
+        private TextView txtNewsTitle, txtNewsDescription, txtDateOfNews;
 
         public MyViewHolder(@NonNull View view) {
             super(view);
             newsImage = view.findViewById(R.id.newsImage);
             txtNewsTitle = view.findViewById(R.id.txtNewsTitle);
-            txtNewsContent = view.findViewById(R.id.txtNewsContent);
+            txtNewsDescription = view.findViewById(R.id.txtNewsDescription);
             txtDateOfNews = view.findViewById(R.id.txtDateOfNews);
         }
 
@@ -63,8 +63,8 @@ public class ListNewsFragmentAdapter extends RecyclerView.Adapter<ListNewsFragme
             return txtNewsTitle;
         }
 
-        public TextView getTxtNewsContent() {
-            return txtNewsContent;
+        public TextView getTxtNewsDescription() {
+            return txtNewsDescription;
         }
 
         public TextView getTxtDateOfNews() {

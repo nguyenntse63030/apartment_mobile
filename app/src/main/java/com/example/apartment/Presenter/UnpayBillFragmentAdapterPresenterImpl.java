@@ -39,7 +39,7 @@ public class UnpayBillFragmentAdapterPresenterImpl implements UnpayBillFragmentA
         String dateExpired = listBills.get(position).getDateExpired();
 
         int room = listBills.get(position).getRoom();
-        float costTotal = listBills.get(position).getCostTotal();
+        String costTotal = listBills.get(position).getCostTotal();
 
         Bills bills = new Bills(code, type, dateExpired, apartment, room, costTotal);
         mCallback.onClickUnpayBillItem(bills);

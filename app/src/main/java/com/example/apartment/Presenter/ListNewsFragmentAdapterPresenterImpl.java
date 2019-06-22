@@ -36,7 +36,7 @@ public class ListNewsFragmentAdapterPresenterImpl implements ListNewsFragmentAda
     public void onBindViewHolder(ListNewsFragmentAdapter.MyViewHolder holder, int position) {
         holder.getNewsImage().setImageResource(listNews.get(position).getNewsImage());
         holder.getTxtNewsTitle().setText(listNews.get(position).getNewsTitle());
-        holder.getTxtNewsContent().setText(listNews.get(position).getNewsContent());
+        holder.getTxtNewsDescription().setText(listNews.get(position).getNewsDescription());
         holder.getTxtDateOfNews().setText(listNews.get(position).getDateOfNews());
     }
 }

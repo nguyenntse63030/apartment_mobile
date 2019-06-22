@@ -26,42 +26,42 @@ public class PaidBillFragmentPresenterImpl implements PaidBillFragmentContract.p
     public void inputListPaidBillData() {
         listPaidBill.add(new Bills("WSD101-25", "Trung Nguyên",
                 "12/06/2019", "Chung cu the Peak",
-                101, 11000));
+                101, "11,000"));
 
         listPaidBill.add(new Bills("WSD101-28", "Hữu Lễ",
                 "13/06/2019", "Chung cu the Peak",
-                102, 11000));
+                102, "12,000"));
 
         listPaidBill.add(new Bills("WSD101-26", "Bảo Long",
                 "14/06/2019", "Chung cu the Peak",
-                104, 11000));
+                104, "13,000"));
 
         listPaidBill.add(new Bills("WSD101-29", "Bình Minh",
                 "15/06/2019", "Chung cu the Peak",
-                201, 11000));
+                201, "14,000"));
 
         listPaidBill.add(new Bills("WSD101-27", "Hoàng Nhân",
                 "16/06/2019", "Chung cu the Peak",
-                805, 11000));
+                805, "200,000"));
 
         listPaidBill.add(new Bills("WSD101-30", "Duy Thắng",
                 "17/06/2019", "Chung cu the Peak",
-                51, 11000));
+                51, "100,000"));
 
         listPaidBill.add(new Bills("WSD101-45", "Đức Toàn",
                 "18/06/2019", "Chung cu the Peak",
-                113, 11000));
+                113, "150,000"));
 
         listPaidBill.add(new Bills("WSD101-55", "Bá Nam",
                 "19/06/2019", "Chung cu the Peak",
-                256, 11000));
+                256, "250,000"));
 
         listPaidBill.add(new Bills("WSD101-63", "Kim Anh",
                 "20/06/2019", "Chung cu the Peak",
-                365, 11000));
+                365, "50,000"));
 
         listPaidBill.add(new Bills("WSD101-70", "Cao Thư",
                 "21/06/2019", "Chung cu the Peak",
-                111, 11000));
+                111, "25,000"));
     }
 }

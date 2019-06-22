@@ -36,7 +36,7 @@ public class PaidBillFragmentAdapterPresenterImpl implements PaidBillFragmentAda
         String dateExpired = listPaidBill.get(position).getDateExpired();
 
         int room = listPaidBill.get(position).getRoom();
-        float costTotal = listPaidBill.get(position).getCostTotal();
+        String costTotal = listPaidBill.get(position).getCostTotal();
 
         Bills bills = new Bills(code, type, dateExpired, apartment, room, costTotal);
         mCallback.onClickPaidBillItem(bills);

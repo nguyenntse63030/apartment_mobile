@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class Bills implements Serializable {
     private String code, type, dateExpired, apartment;
     private int room;
-    private float costTotal;
+    private String costTotal;
 
-    public Bills(String code, String type, String dateExpired, String apartment, int room, float costTotal) {
+    public Bills(String code, String type, String dateExpired, String apartment, int room, String costTotal) {
         this.code = code;
         this.type = type;
         this.dateExpired = dateExpired;
@@ -36,7 +36,7 @@ public class Bills implements Serializable {
         return room;
     }
 
-    public float getCostTotal() {
+    public String getCostTotal() {
         return costTotal;
     }
 }
