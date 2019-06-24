@@ -1,5 +1,6 @@
 package com.example.apartment.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.apartment.Activity.RoomDetailActivity;
 import com.example.apartment.Adapter.ListRoomFragmentAdapter;
 import com.example.apartment.Contract.ListRoomFragmentAdapterContract;
 import com.example.apartment.Contract.ListRoomFragmentContract;
@@ -18,6 +20,8 @@ import com.example.apartment.Listener.Room_Listener;
 import com.example.apartment.Model.Room;
 import com.example.apartment.Presenter.ListRoomFragmentPresenterImpl;
 import com.example.apartment.R;
+
+import java.io.Serializable;
 
 
 public class ListRoomFragment extends Fragment implements ListRoomFragmentContract.listRoomFragmentView, Room_Listener {
@@ -54,6 +58,9 @@ public class ListRoomFragment extends Fragment implements ListRoomFragmentContra
 
     @Override
     public void onClickRoomItem(Room room) {
-
+        Intent intent = new Intent(getContext(), RoomDetailActivity.class);
+        intent.putExtra("room", (Serializable) room);
+        startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 }

@@ -26,19 +26,24 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
     @Override
     public void inputListRoomData() {
         listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","2","Chung cu The perk"));
+                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
         listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","2","Chung cu The perk"));
+                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
         listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","2","Chung cu The perk"));
+                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
         listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","2","Chung cu The perk"));
+                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
         listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","2","Chung cu The perk"));
+                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
         listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","2","Chung cu The perk"));
+                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
         listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","2","Chung cu The perk"));
+                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
+        listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
+                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
+        listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
+                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
+
 
     }
 }
