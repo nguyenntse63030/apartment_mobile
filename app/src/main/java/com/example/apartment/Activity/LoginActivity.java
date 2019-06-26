@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 
 import com.example.apartment.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button btnSignIn, btnSignInGoogle;
+    private ScrollView scrollViewLogin;
+
+    private Button btnSignIn, btnSignInGoogle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +22,8 @@ public class LoginActivity extends AppCompatActivity {
 
         btnSignIn = findViewById(R.id.btnSignIn);
         btnSignInGoogle = findViewById(R.id.btnSignInGoogle);
+        scrollViewLogin = findViewById(R.id.scrollViewLogin);
+
     }
 
     @Override
@@ -32,5 +37,6 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+        scrollViewLogin.setOverScrollMode(View.OVER_SCROLL_NEVER);
     }
 }

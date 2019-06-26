@@ -12,35 +12,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:weightSum="8"
             android:background="@color/backGroundBillCardView">
 
             <androidx.percentlayout.widget.PercentRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.3">
+                android:layout_weight="3">
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="150dp"
                     app:layout_widthPercent="50%"
-                    app:layout_heightPercent="70%"
-                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/logo_apartment"
                     android:scaleType="fitXY"/>
             </androidx.percentlayout.widget.PercentRelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.05">
-                <!--chi la khung trang de phan cach-->
-            </RelativeLayout>
+
 
             <ScrollView
+                android:id="@+id/scrollViewLogin"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.5">
+                android:layout_weight="5">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -63,7 +59,8 @@
                                 android:id="@+id/edEmail"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="textEmailAddress"/>
+                                android:inputType="textEmailAddress"
+                                />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </androidx.percentlayout.widget.PercentRelativeLayout>

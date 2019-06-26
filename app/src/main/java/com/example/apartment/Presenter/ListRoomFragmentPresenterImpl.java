@@ -4,6 +4,7 @@ package com.example.apartment.Presenter;
 import com.example.apartment.Api.RoomApi;
 import com.example.apartment.Contract.ListRoomFragmentAdapterContract;
 import com.example.apartment.Contract.ListRoomFragmentContract;
+import com.example.apartment.Global.GlobalValue;
 import com.example.apartment.Listener.Room_Listener;
 import com.example.apartment.Model.Apartment;
 import com.example.apartment.Model.Room;
@@ -32,10 +33,6 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
     private final String USERID = "5cf67c843c70dc0017be87db";
     Gson gson=new GsonBuilder().serializeNulls().create();
     //    https://apartmentswd391.herokuapp.com/api/v1/
-    Retrofit retrofit=new Retrofit.Builder()
-            .baseUrl("https://apartmentswd391.herokuapp.com/api/v1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
 
 
     private ListRoomFragmentAdapterContract.listRoomFragmentAdapterPresenter adapterPresenter;
@@ -52,7 +49,7 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
 
     @Override
     public void inputListRoomData() {
-        roomApi = retrofit.create(RoomApi.class);
+        roomApi = GlobalValue.retrofit.create(RoomApi.class);
         getListRoom(USERID);
     }
     private void getListRoom(String userId){
