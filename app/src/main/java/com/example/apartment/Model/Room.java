@@ -4,8 +4,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Date;
 
 public class Room implements Serializable {
     @SerializedName("_id")

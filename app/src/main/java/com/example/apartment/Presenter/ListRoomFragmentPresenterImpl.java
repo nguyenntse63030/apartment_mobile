@@ -10,7 +10,6 @@ import com.example.apartment.Model.Apartment;
 import com.example.apartment.Model.Room;
 import com.example.apartment.Model.User;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -31,8 +30,12 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
 
     private RoomApi roomApi;
     private final String USERID = "5cf67c843c70dc0017be87db";
-    Gson gson=new GsonBuilder().serializeNulls().create();
+
     //    https://apartmentswd391.herokuapp.com/api/v1/
+    Retrofit retrofit=new Retrofit.Builder()
+            .baseUrl(GlobalValue.ROOM_API_HTTP)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
 
     private ListRoomFragmentAdapterContract.listRoomFragmentAdapterPresenter adapterPresenter;
@@ -48,7 +51,7 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
     }
 
     @Override
-    public void inputListRoomData() {
+    public void loadListRoomData() {
         roomApi = GlobalValue.retrofit.create(RoomApi.class);
         getListRoom(USERID);
     }
