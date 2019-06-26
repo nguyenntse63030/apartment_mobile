@@ -21,8 +21,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.listRoomFragmentPresenter {
     private List<Room> listRoom = new ArrayList<>();
@@ -30,13 +28,6 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
 
     private RoomApi roomApi;
     private final String USERID = "5cf67c843c70dc0017be87db";
-
-    //    https://apartmentswd391.herokuapp.com/api/v1/
-    Retrofit retrofit=new Retrofit.Builder()
-            .baseUrl(GlobalValue.ROOM_API_HTTP)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-
 
     private ListRoomFragmentAdapterContract.listRoomFragmentAdapterPresenter adapterPresenter;
 
