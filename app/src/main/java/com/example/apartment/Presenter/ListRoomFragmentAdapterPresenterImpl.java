@@ -24,29 +24,29 @@ public class ListRoomFragmentAdapterPresenterImpl implements ListRoomFragmentAda
 
     @Override
     public void onClickItemRoom(int position) {
-        String roomNumber = roomList.get(position).getNumber();
-        String address = roomList.get(position).getAddress();
-        String apartment = roomList.get(position).getApartmentName();
-        String signDate = roomList.get(position).getSignDate();
-        String expiredDate = roomList.get(position).getExpiredDate();
-        String district = roomList.get(position).getDistrict();
-        String id = roomList.get(position).getID();
-        int unpayBill = roomList.get(position).getNumberUnpayBill();
-        int totalBill = roomList.get(position).getTotalBill();
-        String owner = roomList.get(position).getOwnerName();
-
-        Room room = new Room(id,roomNumber,address,district,signDate,expiredDate,apartment,unpayBill,totalBill,owner);
-        listener.onClickRoomItem(room);
+//        String roomNumber = roomList.get(position).getNumber();
+//        String address = roomList.get(position).getAddress();
+//        String apartment = roomList.get(position).getApartmentName();
+//        String signDate = roomList.get(position).getSignDate();
+//        String expiredDate = roomList.get(position).getExpiredDate();
+//        String district = roomList.get(position).getDistrict();
+//        String id = roomList.get(position).getID();
+//        int unpayBill = roomList.get(position).getNumberUnpayBill();
+//        int totalBill = roomList.get(position).getTotalBill();
+//        String owner = roomList.get(position).getOwnerName();
+//
+//        Room room = new Room(id,roomNumber,address,district,signDate,expiredDate,apartment,unpayBill,totalBill,owner);
+//        listener.onClickRoomItem(room);
     }
 
     @Override
     public void onBindViewHolder(ListRoomFragmentAdapter.MyViewHolder holder, int position) {
-        holder.getLbRoomNumber().setText(""+roomList.get(position).getNumber());
-        holder.getTxtRoomNumber().setText("Room number: "+roomList.get(position).getNumber());
-        holder.getTxtAddress().setText("Address: "+roomList.get(position).getAddress());
-        holder.getTxtApartment().setText(roomList.get(position).getApartmentName());
-        holder.getTxtDistrict().setText("District: "+roomList.get(position).getDistrict());
-        holder.getTxtRoomID().setText("Room ID: "+roomList.get(position).getID());
+        holder.getLbRoomNumber().setText(""+roomList.get(position).getRoomNumber());
+        holder.getTxtRoomNumber().setText("Room number: "+roomList.get(position).getRoomNumber());
+        holder.getTxtAddress().setText("Address: "+roomList.get(position).getUser().getAddress());
+        holder.getTxtApartment().setText(roomList.get(position).getApartment().getName());
+        holder.getTxtDistrict().setText("District: "+roomList.get(position).getApartment().getAddress());
+        holder.getTxtRoomID().setText("Room ID: "+roomList.get(position).getCode());
         holder.getTxtSignDate().setText("Sign date: "+roomList.get(position).getSignDate());
         holder.getTxtUnpayBillNumber().setText("Unpay bill : "+roomList.get(position).getNumberUnpayBill());
     }

@@ -1,102 +1,74 @@
 package com.example.apartment.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class Room implements Serializable {
-    private String ID,number,address,district,signDate,ExpiredDate,apartmentName,ownerName;
-    private int numberUnpayBill,totalBill;
+    @SerializedName("_id")
+    @Expose
+    private String id;
+    private String roomNumber;
+    private String code;
+    private User user;
+    private Apartment apartment;
+    private int numberUnpayBill, totalBill;
+    private String signDate, expiredDate;
 
-    public Room(String ID, String number, String address, String district, String signDate
-            , String expiredDate, String apartmentName, int numberUnpayBill, int totalBill,String ownerName) {
-        this.ID = ID;
-        this.number = number;
-        this.address = address;
-        this.district = district;
-        this.signDate = signDate;
-        ExpiredDate = expiredDate;
-        this.apartmentName = apartmentName;
-        this.numberUnpayBill = numberUnpayBill;
-        this.totalBill = totalBill;
-        this.ownerName = ownerName;
+    public User getUser() {
+        return user;
     }
 
-    public String getOwnerName() {
-        return ownerName;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
+    public Apartment getApartment() {
+        return apartment;
     }
 
-    public String getID() {
-        return ID;
+    public void setApartment(Apartment apartment) {
+        this.apartment = apartment;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public String getId() {
+        return id;
     }
 
-    public String getNumber() {
-        return number;
+    public String getRoomNumber() {
+        return roomNumber;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getSignDate() {
-        return signDate;
-    }
-
-    public void setSignDate(String signDate) {
-        this.signDate = signDate;
-    }
-
-    public String getExpiredDate() {
-        return ExpiredDate;
-    }
-
-    public void setExpiredDate(String expiredDate) {
-        ExpiredDate = expiredDate;
-    }
-
-    public String getApartmentName() {
-        return apartmentName;
-    }
-
-    public void setApartmentName(String apartmentName) {
-        this.apartmentName = apartmentName;
+    public String getCode() {
+        return code;
     }
 
     public int getNumberUnpayBill() {
         return numberUnpayBill;
     }
 
-    public void setNumberUnpayBill(int numberUnpayBill) {
-        this.numberUnpayBill = numberUnpayBill;
-    }
-
     public int getTotalBill() {
         return totalBill;
     }
 
-    public void setTotalBill(int totalBill) {
+    public String getSignDate() {
+        return signDate;
+    }
+
+    public String getExpiredDate() {
+        return expiredDate;
+    }
+
+    public Room(String id, String roomNumber, String code, int numberUnpayBill, int totalBill, String signDate, String expiredDate) {
+        this.id = id;
+        this.roomNumber = roomNumber;
+        this.code = code;
+        this.numberUnpayBill = numberUnpayBill;
         this.totalBill = totalBill;
+        this.signDate = signDate;
+        this.expiredDate = expiredDate;
     }
 }

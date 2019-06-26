@@ -14,15 +14,15 @@ public class RoomDetailActivityPresenterImpl implements RoomDetailActivityContra
         //load data from intent
         Room room = (Room) intent.getSerializableExtra("room");
         //input data
-        lbRoomNumber.setText("Room "+room.getNumber());
-        txtRoomID.setText("Code: "+room.getID());
-        txtRoomNumber.setText("Number: "+room.getNumber());
-        txtDistrict.setText("District: "+room.getDistrict());
-        txtUnpayBillNumber.setText("Unpay bill: "+room.getNumberUnpayBill());
-        txtTotalBillNumber.setText("Total bill: "+room.getTotalBill());
-        txtSignDate.setText("Sign Date: "+room.getSignDate());
-        txtExpireDate.setText("Expired Date: "+room.getExpiredDate());
-        txtOwnerName.setText("Owner: "+room.getOwnerName());
-        txtApartment.setText("Apartment: "+room.getApartmentName());
+//        lbRoomNumber.setText("Room "+room.getNumber());
+//        txtRoomID.setText("Code: "+room.getID());
+//        txtRoomNumber.setText("Number: "+room.getNumber());
+//        txtDistrict.setText("District: "+room.getDistrict());
+//        txtUnpayBillNumber.setText("Unpay bill: "+room.getNumberUnpayBill());
+//        txtTotalBillNumber.setText("Total bill: "+room.getTotalBill());
+//        txtSignDate.setText("Sign Date: "+room.getSignDate());
+//        txtExpireDate.setText("Expired Date: "+room.getExpiredDate());
+//        txtOwnerName.setText("Owner: "+room.getOwnerName());
+//        txtApartment.setText("Apartment: "+room.getApartmentName());
     }
 }

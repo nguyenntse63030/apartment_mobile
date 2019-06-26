@@ -51,7 +51,7 @@
                         android:layout_height="60dp"
                         android:layout_below="@+id/lbRoomNumber"
                         android:layout_centerHorizontal="true"
-                        app:layout_widthPercent="70%"
+                        app:layout_widthPercent="90%"
                         android:gravity="center"
                         android:textSize="15dp"
                         android:text="Chung cu The Peak"/>

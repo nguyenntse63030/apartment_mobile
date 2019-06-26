@@ -1,49 +1,94 @@
 package com.example.apartment.Presenter;
 
+
+import com.example.apartment.Api.RoomApi;
 import com.example.apartment.Contract.ListRoomFragmentAdapterContract;
 import com.example.apartment.Contract.ListRoomFragmentContract;
 import com.example.apartment.Listener.Room_Listener;
+import com.example.apartment.Model.Apartment;
 import com.example.apartment.Model.Room;
+import com.example.apartment.Model.User;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.listRoomFragmentPresenter {
     private List<Room> listRoom = new ArrayList<>();
     private ListRoomFragmentContract.listRoomFragmentView view;
+
+    private RoomApi roomApi;
+    private final String USERID = "5cf67c843c70dc0017be87db";
+    Gson gson=new GsonBuilder().serializeNulls().create();
+    //    https://apartmentswd391.herokuapp.com/api/v1/
+    Retrofit retrofit=new Retrofit.Builder()
+            .baseUrl("https://apartmentswd391.herokuapp.com/api/v1/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+
     private ListRoomFragmentAdapterContract.listRoomFragmentAdapterPresenter adapterPresenter;
 
     public ListRoomFragmentPresenterImpl(ListRoomFragmentContract.listRoomFragmentView view) {
         this.view = view;
     }
 
-    @Override
-    public void createAdapter() {
+    //@Override
+    private void createAdapter() {
         adapterPresenter = new ListRoomFragmentAdapterPresenterImpl(listRoom, (Room_Listener) view);
         view.setAdapter(adapterPresenter);
     }
 
     @Override
     public void inputListRoomData() {
-        listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
-        listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
-        listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
-        listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
-        listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
-        listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
-        listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
-        listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
-        listRoom.add(new Room("ABC_123","103","123/456 khu pho 1 phuong ABC TP.XYZ Tinh ASD"
-                ,"Quan 12","12/4/2000","null","Chung cu The perk",2,15,"Dang Huu Le"));
-
-
+        roomApi = retrofit.create(RoomApi.class);
+        getListRoom(USERID);
     }
+    private void getListRoom(String userId){
+        try {
+            Call<JsonElement> call =roomApi.getRoomByUser(userId);
+            call.enqueue(new Callback<JsonElement>() {
+                @Override
+                public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                    JsonElement responseData = response.body();
+                    JsonParser parser= new JsonParser();
+                    JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
+                    JsonArray rooms = responseObj.get("listRoom").getAsJsonArray();
+                    for (int i = 0;i < rooms.size();i++){
+                        JsonObject room = rooms.get(i).getAsJsonObject();
+                        JsonObject user = room.get("user").getAsJsonObject();
+                        JsonObject apartment = room.get("apartment").getAsJsonObject();
+
+                        Gson gsonSP = new Gson();
+
+                        User userObj=gsonSP.fromJson(user.toString(),User.class);
+                        Apartment apartmentObj=gsonSP.fromJson(apartment.toString(), Apartment.class);
+                        Room roomObj=gsonSP.fromJson(room.toString(),Room.class);
+                        roomObj.setUser(userObj);
+                        roomObj.setApartment(apartmentObj);
+                        listRoom.add(roomObj);
+                    }
+                    createAdapter();
+                }
+                @Override
+                public void onFailure(Call<JsonElement> call, Throwable t) {
+                    System.out.println(t.getMessage());
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }
