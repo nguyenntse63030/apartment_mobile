@@ -24,19 +24,20 @@ public class ListRoomFragmentAdapterPresenterImpl implements ListRoomFragmentAda
 
     @Override
     public void onClickItemRoom(int position) {
-//        String roomNumber = roomList.get(position).getNumber();
-//        String address = roomList.get(position).getAddress();
-//        String apartment = roomList.get(position).getApartmentName();
+
+//        String roomNumber = roomList.get(position).getRoomNumber();
+//        String address = roomList.get(position).getApartment().getName();
+//        String apartment = roomList.get(position).getApartment().getName();
 //        String signDate = roomList.get(position).getSignDate();
 //        String expiredDate = roomList.get(position).getExpiredDate();
-//        String district = roomList.get(position).getDistrict();
-//        String id = roomList.get(position).getID();
+//        String district = roomList.get(position).getApartment().getAddress();
+//        String id = roomList.get(position).getCode();
 //        int unpayBill = roomList.get(position).getNumberUnpayBill();
 //        int totalBill = roomList.get(position).getTotalBill();
-//        String owner = roomList.get(position).getOwnerName();
-//
-//        Room room = new Room(id,roomNumber,address,district,signDate,expiredDate,apartment,unpayBill,totalBill,owner);
-//        listener.onClickRoomItem(room);
+//        String owner = roomList.get(position).getUser().getName();
+
+        Room room = roomList.get(position);
+        listener.onClickRoomItem(room);
     }
 
     @Override

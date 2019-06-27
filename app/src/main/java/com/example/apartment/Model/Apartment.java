@@ -3,7 +3,9 @@ package com.example.apartment.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Apartment {
+import java.io.Serializable;
+
+public class Apartment implements Serializable {
     @SerializedName("_id")
     @Expose
     private String id;
