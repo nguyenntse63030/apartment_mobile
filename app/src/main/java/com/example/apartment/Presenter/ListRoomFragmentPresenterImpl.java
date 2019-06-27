@@ -32,9 +32,6 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
 
     private RoomApi roomApi;
     private final String USERID = "5cf67c843c70dc0017be87db";
-
-
-
     private ListRoomFragmentAdapterContract.listRoomFragmentAdapterPresenter adapterPresenter;
 
     public ListRoomFragmentPresenterImpl(ListRoomFragmentContract.listRoomFragmentView view) {
