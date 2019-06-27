@@ -5,8 +5,7 @@ import com.example.apartment.Presenter.ListNewsFragmentAdapterPresenterImpl;
 
 public class ListNewsFragmentContract {
     public interface listNewsFragmentPresenter{
-        void createAdapter();
-        void inputListNewsData();
+        void loadListNewsData();
     }
 
     public interface listNewsFragmentView{

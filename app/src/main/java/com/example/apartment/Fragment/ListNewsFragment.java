@@ -33,7 +33,6 @@ public class ListNewsFragment extends Fragment implements ListNewsFragmentContra
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new ListNewsFragmentPresenterImpl(this);
-        presenter.inputListNewsData();
     }
 
     @Nullable
@@ -41,9 +40,8 @@ public class ListNewsFragment extends Fragment implements ListNewsFragmentContra
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_news_fragment, container, false);
         recyclerView = view.findViewById(R.id.listNewsRecyclerView);
-        presenter.createAdapter();
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        recyclerView.setAdapter(adapter);
+        presenter.loadListNewsData();
         return view;
     }
 
@@ -58,5 +56,6 @@ public class ListNewsFragment extends Fragment implements ListNewsFragmentContra
     @Override
     public void setAdapter(ListNewsFragmentAdapterPresenterImpl listNewsFragmentAdapterPresenter) {
         adapter = new ListNewsFragmentAdapter(listNewsFragmentAdapterPresenter);
+        recyclerView.setAdapter(adapter);
     }
 }
