@@ -1,5 +1,6 @@
 package com.example.apartment.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,11 @@ import com.example.apartment.R;
 
 public class ListNewsFragmentAdapter extends RecyclerView.Adapter<ListNewsFragmentAdapter.MyViewHolder>{
     private ListNewsFragmentAdapterPresenterImpl presenter;
+    private Context context;
 
-    public ListNewsFragmentAdapter(ListNewsFragmentAdapterPresenterImpl presenter) {
+    public ListNewsFragmentAdapter(ListNewsFragmentAdapterPresenterImpl presenter, Context context) {
         this.presenter = presenter;
+        this.context = context;
     }
 
     @NonNull
@@ -29,7 +32,7 @@ public class ListNewsFragmentAdapter extends RecyclerView.Adapter<ListNewsFragme
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        presenter.onBindViewHolder(holder, position);
+        presenter.onBindViewHolder(holder, position, context);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
