@@ -1,7 +1,6 @@
 package com.example.apartment.Presenter;
 
 
-import android.text.format.DateFormat;
 
 import com.example.apartment.Api.RoomApi;
 import com.example.apartment.Contract.ListRoomFragmentAdapterContract;
@@ -18,9 +17,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,6 +47,11 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
         getListRoom(USERID);
     }
     private void getListRoom(String userId){
+        if(listRoom != null){
+            if(!listRoom.isEmpty()){
+                listRoom.clear();
+            }
+        }
         try {
             Call<JsonElement> call =roomApi.getRoomByUser(userId);
             call.enqueue(new Callback<JsonElement>() {
@@ -59,6 +61,7 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
                     JsonParser parser= new JsonParser();
                     JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
                     JsonArray rooms = responseObj.get("listRoom").getAsJsonArray();
+
                     for (int i = 0;i < rooms.size();i++){
                         JsonObject room = rooms.get(i).getAsJsonObject();
                         JsonObject user = room.get("user").getAsJsonObject();
@@ -69,12 +72,14 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
                         User userObj=gsonSP.fromJson(user.toString(),User.class);
                         Apartment apartmentObj=gsonSP.fromJson(apartment.toString(), Apartment.class);
                         Room roomObj=gsonSP.fromJson(room.toString(),Room.class);
+
                         roomObj.setUser(userObj);
                         roomObj.setApartment(apartmentObj);
-                        roomObj.setSignDate(getDate(Long.parseLong(roomObj.getSignDate())));
+                        roomObj.setSignDate(GlobalValue.getDate(Long.parseLong(roomObj.getSignDate())));
+
                         if (!roomObj.getExpiredDate().equals("0"))
                         {
-                            roomObj.setExpiredDate(getDate(Long.parseLong(roomObj.getExpiredDate())));
+                            roomObj.setExpiredDate(GlobalValue.getDate(Long.parseLong(roomObj.getExpiredDate())));
                         }
                         listRoom.add(roomObj);
                     }
@@ -89,11 +94,4 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
             e.printStackTrace();
         }
     }
-    private String getDate(long time) {
-        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-        cal.setTimeInMillis(time);
-        String date = DateFormat.format("dd-MM-yyyy", cal).toString();
-        return date;
-    }
-
 }
