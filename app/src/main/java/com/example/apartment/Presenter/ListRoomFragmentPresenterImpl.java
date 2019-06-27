@@ -1,6 +1,8 @@
 package com.example.apartment.Presenter;
 
 
+import android.text.format.DateFormat;
+
 import com.example.apartment.Api.RoomApi;
 import com.example.apartment.Contract.ListRoomFragmentAdapterContract;
 import com.example.apartment.Contract.ListRoomFragmentContract;
@@ -16,7 +18,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,7 +32,6 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
 
     private RoomApi roomApi;
     private final String USERID = "5cf67c843c70dc0017be87db";
-
     private ListRoomFragmentAdapterContract.listRoomFragmentAdapterPresenter adapterPresenter;
 
     public ListRoomFragmentPresenterImpl(ListRoomFragmentContract.listRoomFragmentView view) {
@@ -68,6 +71,11 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
                         Room roomObj=gsonSP.fromJson(room.toString(),Room.class);
                         roomObj.setUser(userObj);
                         roomObj.setApartment(apartmentObj);
+                        roomObj.setSignDate(getDate(Long.parseLong(roomObj.getSignDate())));
+                        if (!roomObj.getExpiredDate().equals("0"))
+                        {
+                            roomObj.setExpiredDate(getDate(Long.parseLong(roomObj.getExpiredDate())));
+                        }
                         listRoom.add(roomObj);
                     }
                     createAdapter();
@@ -80,6 +88,12 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+    private String getDate(long time) {
+        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+        cal.setTimeInMillis(time);
+        String date = DateFormat.format("dd-MM-yyyy", cal).toString();
+        return date;
     }
 
 }
