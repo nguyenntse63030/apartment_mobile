@@ -16,6 +16,14 @@ public class Room implements Serializable {
     private int numberUnpayBill, totalBill;
     private String signDate, expiredDate;
 
+    public void setSignDate(String signDate) {
+        this.signDate = signDate;
+    }
+
+    public void setExpiredDate(String expiredDate) {
+        this.expiredDate = expiredDate;
+    }
+
     public User getUser() {
         return user;
     }
