@@ -30,7 +30,8 @@ public class NewsDetailActivity extends AppCompatActivity {
         presenter = new NewsDetailActivityPresenterImpl();
 
         Intent intent = NewsDetailActivity.this.getIntent();
-        presenter.fillData(intent, txtDateOfNews, txtNewsTitle, txtNewsContentDetail, newsDetailImage);
+        presenter.fillData(intent, txtDateOfNews, txtNewsTitle,
+                txtNewsContentDetail, newsDetailImage, NewsDetailActivity.this);
 
     }
 

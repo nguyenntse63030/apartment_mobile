@@ -31,7 +31,7 @@ public class ListNewsFragmentAdapterPresenterImpl implements ListNewsFragmentAda
         String newsTitle = listNews.get(position).getNewsTitle();
         String newsContentDetail = listNews.get(position).getNewsContentDetail();
         String dateOfNews = listNews.get(position).getDateOfNews();
-        int newsImage = listNews.get(position).getNewsImage();
+        String newsImage = listNews.get(position).getNewsImage();
 
         News news = new News(newsTitle, newsContentDetail, dateOfNews, newsImage);
         mCallback.onClickNewsItem(news);
@@ -43,7 +43,7 @@ public class ListNewsFragmentAdapterPresenterImpl implements ListNewsFragmentAda
         try{
             Glide.with(context)
                     .asBitmap()
-                    .load("https://photo2.tinhte.vn/data/attachment-files/2015/07/3096360_underneath_the_tree-wallpaper-1920x1080.jpg")
+                    .load("http://file.vforum.vn/hinh/2015/09/hinh-anh-bong-da-3d-3.jpg")
                     .into(holder.getNewsImage());
             holder.getTxtNewsTitle().setText(listNews.get(position).getNewsTitle());
             holder.getTxtNewsDescription().setText(listNews.get(position).getNewsDescription());

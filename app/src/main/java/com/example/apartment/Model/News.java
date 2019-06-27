@@ -16,9 +16,9 @@ public class News implements Serializable {
     @SerializedName("createdTime")
     private String dateOfNews;
     @SerializedName("image")
-    private int newsImage;
+    private String newsImage;
 
-    public News(String newsTitle, String newsDescription, int newsImage, String dateOfNews, String newsContentDetail) {
+    public News(String newsTitle, String newsDescription, String newsImage, String dateOfNews, String newsContentDetail) {
         this.newsTitle = newsTitle;
         this.newsDescription = newsDescription;
         this.newsContentDetail = newsContentDetail;
@@ -26,7 +26,7 @@ public class News implements Serializable {
         this.newsImage = newsImage;
     }
 
-    public News(String newsTitle, String newsContentDetail, String dateOfNews, int newsImage) {
+    public News(String newsTitle, String newsContentDetail, String dateOfNews, String newsImage) {
         this.newsTitle = newsTitle;
         this.newsContentDetail = newsContentDetail;
         this.dateOfNews = dateOfNews;
@@ -49,7 +49,7 @@ public class News implements Serializable {
         return dateOfNews;
     }
 
-    public int getNewsImage() {
+    public String getNewsImage() {
         return newsImage;
     }
 }
