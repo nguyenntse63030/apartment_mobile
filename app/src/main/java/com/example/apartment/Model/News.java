@@ -11,11 +11,11 @@ public class News implements Serializable {
     private String newsTitle;
     @SerializedName("description")
     private String newsDescription;
-    @SerializedName("contentDetail")
+    @SerializedName("content")
     private String newsContentDetail;
     @SerializedName("createdTime")
     private String dateOfNews;
-    @SerializedName("image")
+    @SerializedName("photoURL")
     private String newsImage;
 
     public News(String newsTitle, String newsDescription, String newsImage, String dateOfNews, String newsContentDetail) {
@@ -51,5 +51,9 @@ public class News implements Serializable {
 
     public String getNewsImage() {
         return newsImage;
+    }
+
+    public void setDateOfNews(String dateOfNews) {
+        this.dateOfNews = dateOfNews;
     }
 }

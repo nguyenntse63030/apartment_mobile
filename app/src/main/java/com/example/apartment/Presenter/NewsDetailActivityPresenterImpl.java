@@ -19,10 +19,9 @@ public class NewsDetailActivityPresenterImpl implements NewsDetailActivityContra
         txtDateOfNews.setText(news.getDateOfNews());
         txtNewsTitle.setText(news.getNewsTitle());
         txtNewsContentDetail.setText(news.getNewsContentDetail());
-//        newsDetailImage.setImageResource(news.getNewsImage());
-//        Glide.with(context)
-//                .asBitmap()
-//                .load(news.getNewsImage())
-//                .into(newsDetailImage);
+        Glide.with(context)
+                .asBitmap()
+                .load(news.getNewsImage())
+                .into(newsDetailImage);
     }
 }

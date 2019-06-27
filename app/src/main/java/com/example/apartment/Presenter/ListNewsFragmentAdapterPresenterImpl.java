@@ -7,8 +7,6 @@ import com.example.apartment.Adapter.ListNewsFragmentAdapter;
 import com.example.apartment.Contract.ListNewsFragmentAdapterContract;
 import com.example.apartment.Listener.List_News_Listener;
 import com.example.apartment.Model.News;
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.module.AppGlideModule;
 
 import java.util.List;
 
@@ -39,11 +37,10 @@ public class ListNewsFragmentAdapterPresenterImpl implements ListNewsFragmentAda
 
     @Override
     public void onBindViewHolder(ListNewsFragmentAdapter.MyViewHolder holder, int position, Context context) {
-//        holder.getNewsImage().setImageResource(listNews.get(position).getNewsImage());
         try{
             Glide.with(context)
                     .asBitmap()
-                    .load("http://file.vforum.vn/hinh/2015/09/hinh-anh-bong-da-3d-3.jpg")
+                    .load(listNews.get(position).getNewsImage())
                     .into(holder.getNewsImage());
             holder.getTxtNewsTitle().setText(listNews.get(position).getNewsTitle());
             holder.getTxtNewsDescription().setText(listNews.get(position).getNewsDescription());
@@ -51,7 +48,5 @@ public class ListNewsFragmentAdapterPresenterImpl implements ListNewsFragmentAda
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
     }
 }

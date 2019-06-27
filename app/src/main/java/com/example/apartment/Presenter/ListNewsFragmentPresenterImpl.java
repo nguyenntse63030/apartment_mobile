@@ -42,14 +42,16 @@ public class ListNewsFragmentPresenterImpl implements ListNewsFragmentContract.l
                     JsonParser parser = new JsonParser();
 
                     JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
-                    JsonArray news = responseObj.get("listNews").getAsJsonArray();
+                    JsonArray listNewsAPI = responseObj.get("listNews").getAsJsonArray();
 
-                    for (int i = 0;i < news.size();i++){
-                        JsonObject newsObj = news.get(i).getAsJsonObject();
+                    for (int i = 0;i < listNewsAPI.size();i++){
+                        JsonObject news = listNewsAPI.get(i).getAsJsonObject();
                         Gson gsonSP = new Gson();
 
-                        News newsItem = gsonSP.fromJson(newsObj.toString(),News.class);
-                        listNews.add(newsItem);
+                        News newsObj = gsonSP.fromJson(news.toString(),News.class);
+                        newsObj.setDateOfNews(GlobalValue.getDate(Long.parseLong(newsObj.getDateOfNews())));
+
+                        listNews.add(newsObj);
                     }
 
                     listNewsFragmentAdapterPresenter = new ListNewsFragmentAdapterPresenterImpl(listNews, (List_News_Listener) view);
