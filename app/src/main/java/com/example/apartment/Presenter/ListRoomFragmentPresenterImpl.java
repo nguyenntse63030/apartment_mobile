@@ -47,6 +47,11 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
         getListRoom(USERID);
     }
     private void getListRoom(String userId){
+        if(listRoom != null){
+            if(!listRoom.isEmpty()){
+                listRoom.clear();
+            }
+        }
         try {
             Call<JsonElement> call =roomApi.getRoomByUser(userId);
             call.enqueue(new Callback<JsonElement>() {

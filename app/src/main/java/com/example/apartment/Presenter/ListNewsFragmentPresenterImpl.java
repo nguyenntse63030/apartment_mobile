@@ -31,6 +31,11 @@ public class ListNewsFragmentPresenterImpl implements ListNewsFragmentContract.l
 
     @Override
     public void loadListNewsData() {
+        if(listNews != null){
+            if(!listNews.isEmpty()){
+                listNews.clear();
+            }
+        }
         newsApi = GlobalValue.retrofit.create(NewsApi.class);
         try {
             Call<JsonElement> call = newsApi.getNews();
