@@ -59,4 +59,5 @@ public class ListNewsFragment extends Fragment implements ListNewsFragmentContra
         adapter = new ListNewsFragmentAdapter(listNewsFragmentAdapterPresenter, getContext());
         recyclerView.setAdapter(adapter);
     }
+
 }

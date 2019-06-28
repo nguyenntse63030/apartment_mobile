@@ -10,29 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.percentlayout.widget.PercentRelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/txtHomeTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_heightPercent="6%"
-                    android:text="News"
-                    android:textSize="25dp"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:background="@color/backGroundTaskbar"/>
-
-            </androidx.percentlayout.widget.PercentRelativeLayout>
-
             <androidx.percentlayout.widget.PercentRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -41,15 +18,11 @@
                     android:id="@+id/fragmentLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:layout_heightPercent="90%"
-                    android:layout_marginTop="5dp">
+                    app:layout_heightPercent="93%">
 
                 </FrameLayout>
 
             </androidx.percentlayout.widget.PercentRelativeLayout>
-
-        </LinearLayout>
-
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/taskBarItem"
