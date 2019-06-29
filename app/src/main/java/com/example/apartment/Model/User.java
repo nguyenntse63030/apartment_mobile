@@ -9,9 +9,9 @@ public class User implements Serializable {
     @SerializedName("_id")
     @Expose
     private String id;
-    private String code, name, gender, role, phone, email, password, address, dateOfBirth;
+    private String code, name, gender, role, phone, email, password, address, dateOfBirth,createdTime,photoURL;
 
-    public User(String id, String code, String name, String gender, String role, String phone, String email, String password, String address, String dateOfBirth) {
+    public User(String id, String code, String name, String gender, String role, String phone, String email, String password, String address, String dateOfBirth, String createdTime, String photoURL) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -22,6 +22,24 @@ public class User implements Serializable {
         this.password = password;
         this.address = address;
         this.dateOfBirth = dateOfBirth;
+        this.createdTime = createdTime;
+        this.photoURL = photoURL;
+    }
+
+    public String getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(String createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
     }
 
     public String getId() {
