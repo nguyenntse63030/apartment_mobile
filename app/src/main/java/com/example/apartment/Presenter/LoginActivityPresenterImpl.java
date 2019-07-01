@@ -39,57 +39,77 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
         try {
             String phone = editPhone.getText().toString();
             String password = editPassword.getText().toString();
-            userApi = GlobalValue.retrofit.create(UserApi.class);
+
+            boolean checkValid = checkValid(editPhone, editPassword, phone, password);
+            if(checkValid){
+                userApi = GlobalValue.retrofit.create(UserApi.class);
 //            JSONObject paramObj = new JSONObject();
 //            paramObj.put("phone", phone);
 //            paramObj.put("password", password);
-            Map<String,String> data=new HashMap<>();
-            data.put("phone", phone);
-            data.put("password", password);
-            Call<JsonElement> call =userApi.verify(data);
-            call.enqueue(new Callback<JsonElement>() {
-                @Override
-                public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                    JsonElement responseData = response.body();
-                    JsonParser parser= new JsonParser();
-                    JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
-                    if (responseObj.has("user")){
-                        JsonObject user = responseObj.get("user").getAsJsonObject();
-                        String token = responseObj.get("token").getAsString();
+                Map<String,String> data=new HashMap<>();
+                data.put("phone", phone);
+                data.put("password", password);
+                Call<JsonElement> call =userApi.verify(data);
+                call.enqueue(new Callback<JsonElement>() {
+                    @Override
+                    public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                        JsonElement responseData = response.body();
+                        JsonParser parser= new JsonParser();
+                        JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
+                        if (responseObj.has("user")){
+                            JsonObject user = responseObj.get("user").getAsJsonObject();
+                            String token = responseObj.get("token").getAsString();
 
-                        Gson gsonSP = new Gson();
+                            Gson gsonSP = new Gson();
 
-                        User userObj=gsonSP.fromJson(user.toString(),User.class);
-                        SharedPreferences.Editor editor = context.getSharedPreferences("User", MODE_PRIVATE).edit();
-                        //add token
-                        editor.putString("token", token);
-                        //add profile user
-                        editor.putString("name", userObj.getName());
-                        editor.putString("gender", userObj.getGender());
-                        editor.putString("mail", userObj.getEmail());
-                        editor.putString("phone", userObj.getPhone());
-                        editor.putString("birthDay", userObj.getDateOfBirth());
-                        editor.putString("address", userObj.getAddress());
-                        editor.putString("code", userObj.getCode());
-                        editor.putString("createTime", userObj.getCreatedTime());
-                        editor.putString("photoURL", userObj.getPhotoURL());
+                            User userObj=gsonSP.fromJson(user.toString(),User.class);
+                            SharedPreferences.Editor editor = context.getSharedPreferences("User", MODE_PRIVATE).edit();
+                            //add token
+                            editor.putString("token", token);
+                            //add profile user
+                            editor.putString("name", userObj.getName());
+                            editor.putString("gender", userObj.getGender());
+                            editor.putString("mail", userObj.getEmail());
+                            editor.putString("phone", userObj.getPhone());
+                            editor.putString("birthDay", userObj.getDateOfBirth());
+                            editor.putString("address", userObj.getAddress());
+                            editor.putString("code", userObj.getCode());
+                            editor.putString("createTime", userObj.getCreatedTime());
+                            editor.putString("photoURL", userObj.getPhotoURL());
 
-                        editor.apply();
-                        view.changePage();
+                            editor.apply();
+                            view.changePage();
 
 
-                    }else {
-                        System.out.println(response);
+                        }else {
+                            System.out.println(response);
+                        }
+
                     }
+                    @Override
+                    public void onFailure(Call<JsonElement> call, Throwable t) {
+                        System.out.println(t.getMessage());
+                    }
+                });
+            }
 
-                }
-                @Override
-                public void onFailure(Call<JsonElement> call, Throwable t) {
-                    System.out.println(t.getMessage());
-                }
-            });
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private boolean checkValid(TextInputEditText editPhone, TextInputEditText editPassword, String phone, String password) {
+        boolean valid = true;
+
+        if(phone.isEmpty()){
+            editPhone.setError("Please enter your phone");
+            valid = false;
+        }
+
+        if(password.isEmpty()){
+            editPassword.setError("Please enter your password");
+            valid = false;
+        }
+        return valid;
     }
 }

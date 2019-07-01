@@ -37,11 +37,12 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityCon
     protected void onStart() {
         super.onStart();
 
-        Intent intent= new Intent(LoginActivity.this, HomeActivity.class);
+
         try {
             SharedPreferences sharedPreferences = getSharedPreferences("User", MODE_PRIVATE);
             String token = sharedPreferences.getString("token","");
             if(!token.isEmpty()){
+                Intent intent= new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -49,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityCon
             e.printStackTrace();
         }
 
-        SharedPreferences.Editor editor = getSharedPreferences("User", MODE_PRIVATE).edit();
+       // SharedPreferences.Editor editor = getSharedPreferences("User", MODE_PRIVATE).edit();
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
