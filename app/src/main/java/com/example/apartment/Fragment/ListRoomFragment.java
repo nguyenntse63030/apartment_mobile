@@ -57,5 +57,5 @@ public class ListRoomFragment extends Fragment implements ListRoomFragmentContra
         startActivity(intent);
         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
-    
+
 }
