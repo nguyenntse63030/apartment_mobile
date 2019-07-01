@@ -9,6 +9,7 @@ import com.example.apartment.Api.UserApi;
 import com.example.apartment.Contract.LoginActivityContract;
 import com.example.apartment.Global.GlobalValue;
 import com.example.apartment.Model.User;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -27,9 +28,17 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class LoginActivityPresenterImpl implements LoginActivityContract.LoginActivityPresenter {
     private UserApi userApi;
+    private LoginActivityContract.LoginActivityView view;
+
+    public LoginActivityPresenterImpl(LoginActivityContract.LoginActivityView view) {
+        this.view = view;
+    }
+
     @Override
-    public void login(final Intent intent, String phone, String password, final Context context) {
+    public void login(TextInputEditText editPhone, TextInputEditText editPassword, final Context context) {
         try {
+            String phone = editPhone.getText().toString();
+            String password = editPassword.getText().toString();
             userApi = GlobalValue.retrofit.create(UserApi.class);
 //            JSONObject paramObj = new JSONObject();
 //            paramObj.put("phone", phone);
@@ -66,7 +75,7 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
                         editor.putString("photoURL", userObj.getPhotoURL());
 
                         editor.apply();
-                        context.startActivity(intent);
+                        view.changePage();
 
 
                     }else {

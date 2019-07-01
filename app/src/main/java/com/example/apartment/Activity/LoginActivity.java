@@ -13,7 +13,7 @@ import com.example.apartment.Presenter.LoginActivityPresenterImpl;
 import com.example.apartment.R;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements LoginActivityContract.LoginActivityView {
     private TextInputEditText editPhone,editPassword;
     private ScrollView scrollViewLogin;
     private  LoginActivityContract.LoginActivityPresenter presenter;
@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         scrollViewLogin = findViewById(R.id.scrollViewLogin);
         editPhone = findViewById(R.id.editPhone);
         editPassword = findViewById(R.id.editPassword);
-        presenter = new LoginActivityPresenterImpl();
+        presenter = new LoginActivityPresenterImpl(this);
 
     }
 
@@ -54,10 +54,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    String phone = editPhone.getText().toString();
-                    String password = editPassword.getText().toString();
-                    Intent intentOnclick= new Intent(LoginActivity.this, HomeActivity.class);
-                    presenter.login(intentOnclick,phone,password,getApplicationContext());
+                    presenter.login(editPhone,editPassword,getApplicationContext());
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -68,5 +65,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void changePage() {
+        Intent intentOnclick= new Intent(LoginActivity.this, HomeActivity.class);
+        startActivity(intentOnclick);
+        finish();
+    }
 }
 
