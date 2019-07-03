@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface RoomApi {
-    @GET("room/{userId}")
+    @GET("room/userId/{userId}")
     Call<JsonElement> getRoomByUser(@Path("userId")String userId);
 }
