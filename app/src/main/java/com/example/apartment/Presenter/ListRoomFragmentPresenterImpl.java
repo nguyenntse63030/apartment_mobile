@@ -2,6 +2,9 @@ package com.example.apartment.Presenter;
 
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.example.apartment.Api.RoomApi;
 import com.example.apartment.Contract.ListRoomFragmentAdapterContract;
 import com.example.apartment.Contract.ListRoomFragmentContract;
@@ -28,7 +31,6 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
     private ListRoomFragmentContract.listRoomFragmentView view;
 
     private RoomApi roomApi;
-    private final String USERID = "5cf67c843c70dc0017be87db";
     private ListRoomFragmentAdapterContract.listRoomFragmentAdapterPresenter adapterPresenter;
 
     public ListRoomFragmentPresenterImpl(ListRoomFragmentContract.listRoomFragmentView view) {
@@ -42,9 +44,11 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
     }
 
     @Override
-    public void loadListRoomData() {
+    public void loadListRoomData(Context context) {
         roomApi = GlobalValue.retrofit.create(RoomApi.class);
-        getListRoom(USERID);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("User",Context.MODE_PRIVATE);
+        String userId=sharedPreferences.getString("id","");
+        getListRoom(userId);
     }
     private void getListRoom(String userId){
         if(listRoom != null){

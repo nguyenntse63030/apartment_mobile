@@ -26,12 +26,13 @@ public class ListNewsFragmentAdapterPresenterImpl implements ListNewsFragmentAda
 
     @Override
     public void onClickItemNews(int position) {
-        String newsTitle = listNews.get(position).getNewsTitle();
-        String newsContentDetail = listNews.get(position).getNewsContentDetail();
-        String dateOfNews = listNews.get(position).getDateOfNews();
-        String newsImage = listNews.get(position).getNewsImage();
-
-        News news = new News(newsTitle, newsContentDetail, dateOfNews, newsImage);
+//        String newsTitle = listNews.get(position).getNewsTitle();
+//        String newsContentDetail = listNews.get(position).getNewsContentDetail();
+//        String dateOfNews = listNews.get(position).getDateOfNews();
+//        String newsImage = listNews.get(position).getNewsImage();
+//
+//        News news = new News(newsTitle, newsContentDetail, dateOfNews, newsImage);
+        News news = listNews.get(position);
         mCallback.onClickNewsItem(news);
     }
 

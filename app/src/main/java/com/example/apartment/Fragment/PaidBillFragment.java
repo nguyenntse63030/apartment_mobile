@@ -29,7 +29,7 @@ public class PaidBillFragment extends Fragment implements PaidBillFragmentContra
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new PaidBillFragmentPresenterImpl(this);
-        presenter.inputListPaidBillData();
+        presenter.inputListPaidBillData(getActivity().getApplicationContext());
     }
 
     @Nullable
@@ -39,7 +39,6 @@ public class PaidBillFragment extends Fragment implements PaidBillFragmentContra
         recyclerView = view.findViewById(R.id.listPaidBillRecyclerView);
         presenter.createAdapter();
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        recyclerView.setAdapter(adapter);
         return view;
     }
 
@@ -51,5 +50,6 @@ public class PaidBillFragment extends Fragment implements PaidBillFragmentContra
     @Override
     public void setAdapter(PaidBillFragmentAdapterPresenterImpl paidBillFragmentAdapterPresenter) {
         adapter = new PaidBillFragmentAdapter(paidBillFragmentAdapterPresenter);
+        recyclerView.setAdapter(adapter);
     }
 }

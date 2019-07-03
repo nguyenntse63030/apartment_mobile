@@ -30,7 +30,7 @@ public class UnpayBillFragment extends Fragment implements UnpayBillFragmentCont
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new UnpayBillFragmentPresenterImpl(this);
-        presenter.inputListUnpayBillData();
+        presenter.inputListUnpayBillData(getActivity().getApplicationContext());
     }
 
     @Nullable
@@ -40,7 +40,6 @@ public class UnpayBillFragment extends Fragment implements UnpayBillFragmentCont
         recyclerView = view.findViewById(R.id.listUnpayBillRecyclerView);
         presenter.createAdapter();
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        recyclerView.setAdapter(adapter);
         return view;
     }
 
@@ -52,5 +51,6 @@ public class UnpayBillFragment extends Fragment implements UnpayBillFragmentCont
     @Override
     public void setAdapter(UnpayBillFragmentAdapterPresenterImpl unpayBillFragmentAdapterPresenter) {
         adapter = new UnpayBillFragmentAdapter(unpayBillFragmentAdapterPresenter);
+        recyclerView.setAdapter(adapter);
     }
 }
