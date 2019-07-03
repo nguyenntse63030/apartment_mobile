@@ -40,7 +40,7 @@ public class ListRoomFragment extends Fragment implements ListRoomFragmentContra
         View view = inflater.inflate(R.layout.list_room_fragment, container, false);
         recyclerView = view.findViewById(R.id.listRoomRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        presenter.loadListRoomData();
+        presenter.loadListRoomData(getActivity().getApplicationContext());
         return view;
     }
 

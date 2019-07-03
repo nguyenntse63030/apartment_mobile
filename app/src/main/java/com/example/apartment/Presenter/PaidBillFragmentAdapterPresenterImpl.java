@@ -19,26 +19,18 @@ public class PaidBillFragmentAdapterPresenterImpl implements PaidBillFragmentAda
 
     @Override
     public void onBindViewHolder(PaidBillFragmentAdapter.MyViewHolder holder, int position) {
-        holder.getTxtRoomNumber().setText("ROOM " + listPaidBill.get(position).getRoom());
-        holder.getTxtApartment().setText(listPaidBill.get(position).getApartment());
-        holder.getTxtBillCode().setText("Code: " + listPaidBill.get(position).getCode());
+        holder.getTxtRoomNumber().setText("ROOM " + listPaidBill.get(position).getRoom().getRoomNumber());
+        holder.getTxtApartment().setText(listPaidBill.get(position).getApartment().getName());
+        holder.getTxtBillCode().setText("Code: " + listPaidBill.get(position).getCode().substring(0,15));
         holder.getTxtBillType().setText("Type: " + listPaidBill.get(position).getType());
-        holder.getTxtDateExpired().setText("Date Expired: " + listPaidBill.get(position).getDateExpired());
-        holder.getTxtBillTotal().setText("Total: " + listPaidBill.get(position).getCostTotal() + " VND");
+        holder.getTxtDateExpired().setText("Date Expired: " + listPaidBill.get(position).getExpiredTime());
+        holder.getTxtBillTotal().setText("Total: " + listPaidBill.get(position).getTotal() + " đ");
         holder.getBoderCardView().setBackgroundResource(R.drawable.border_paidbill_cardview);
     }
 
     @Override
     public void onClickPaidBillItem(int position) {
-        String code = listPaidBill.get(position).getCode();
-        String apartment = listPaidBill.get(position).getApartment();
-        String type = listPaidBill.get(position).getType();
-        String dateExpired = listPaidBill.get(position).getDateExpired();
-
-        int room = listPaidBill.get(position).getRoom();
-        String costTotal = listPaidBill.get(position).getCostTotal();
-
-        Bills bills = new Bills(code, type, dateExpired, apartment, room, costTotal);
+        Bills bills = listPaidBill.get(position);
         mCallback.onClickPaidBillItem(bills);
     }
 

@@ -65,6 +65,7 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
                         editor.putString("token", token);
                         //add profile user
                         editor.putString("name", userObj.getName());
+                        editor.putString("id", userObj.getId());
                         editor.putString("gender", userObj.getGender());
                         editor.putString("mail", userObj.getEmail());
                         editor.putString("phone", userObj.getPhone());

@@ -18,12 +18,12 @@ public class UnpayBillFragmentAdapterPresenterImpl implements UnpayBillFragmentA
 
     @Override
     public void onBindViewHolder(UnpayBillFragmentAdapter.MyViewHolder holder, int position) {
-        holder.getTxtRoomNumber().setText("ROOM " + listBills.get(position).getRoom());
-        holder.getTxtApartment().setText(listBills.get(position).getApartment());
-        holder.getTxtBillCode().setText("Code: " + listBills.get(position).getCode());
+        holder.getTxtRoomNumber().setText("ROOM " + listBills.get(position).getRoom().getRoomNumber());
+        holder.getTxtApartment().setText(listBills.get(position).getApartment().getName());
+        holder.getTxtBillCode().setText("Code: " + listBills.get(position).getCode().substring(0,15));
         holder.getTxtBillType().setText("Type: " + listBills.get(position).getType());
-        holder.getTxtDateExpired().setText("Date Expired: " + listBills.get(position).getDateExpired());
-        holder.getTxtBillTotal().setText("Total: " + listBills.get(position).getCostTotal() + " VND");
+        holder.getTxtDateExpired().setText("Date Expired: " + listBills.get(position).getExpiredTime());
+        holder.getTxtBillTotal().setText("Total: " + listBills.get(position).getTotal() + " đ");
     }
 
     @Override
@@ -33,15 +33,9 @@ public class UnpayBillFragmentAdapterPresenterImpl implements UnpayBillFragmentA
 
     @Override
     public void onClickItemBill(int position) {
-        String code = listBills.get(position).getCode();
-        String apartment = listBills.get(position).getApartment();
-        String type = listBills.get(position).getType();
-        String dateExpired = listBills.get(position).getDateExpired();
 
-        int room = listBills.get(position).getRoom();
-        String costTotal = listBills.get(position).getCostTotal();
 
-        Bills bills = new Bills(code, type, dateExpired, apartment, room, costTotal);
-        mCallback.onClickUnpayBillItem(bills);
+        Bills bill = listBills.get(position);
+        mCallback.onClickUnpayBillItem(bill);
     }
 }

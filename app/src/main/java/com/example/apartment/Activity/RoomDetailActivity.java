@@ -1,6 +1,9 @@
 package com.example.apartment.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.apartment.Contract.RoomDetailActivityContract;
+import com.example.apartment.Fragment.ListBillOfRoomFragment;
 import com.example.apartment.Presenter.RoomDetailActivityPresenterImpl;
 import com.example.apartment.R;
 
@@ -36,7 +40,14 @@ public class RoomDetailActivity extends AppCompatActivity {
         Intent intent = RoomDetailActivity.this.getIntent();
         presenter.fillData(intent,lbRoomNumber,txtRoomID,  txtRoomNumber,  txtDistrict,  txtUnpayBillNumber
                 ,  txtTotalBillNumber,  txtSignDate,  txtExpireDate, txtOwnerName, txtApartment);
+
+        ListBillOfRoomFragment listBillOfRoomFragment = new ListBillOfRoomFragment();
+        loadFragment(listBillOfRoomFragment);
+
+
     }
+
+
 
     @Override
     public void finish() {
@@ -46,5 +57,12 @@ public class RoomDetailActivity extends AppCompatActivity {
 
     public void clickToBack(View view) {
         finish();
+    }
+
+    private void loadFragment(Fragment fragment){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentLayout, fragment);
+        fragmentTransaction.commit();
     }
 }

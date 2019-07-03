@@ -1,12 +1,12 @@
 package com.example.apartment.Presenter;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+
 
 import com.example.apartment.Api.BillApi;
-import com.example.apartment.Contract.UnpayBillFragmentContract;
+import com.example.apartment.Contract.ListBillOfRoomFragmentAdapterContract;
+import com.example.apartment.Contract.ListBillOfRoomFragmentContract;
 import com.example.apartment.Global.GlobalValue;
-import com.example.apartment.Listener.Unpay_Bill_Listener;
+import com.example.apartment.Listener.List_Bill_Of_Room_Listener;
 import com.example.apartment.Model.Apartment;
 import com.example.apartment.Model.Bills;
 import com.example.apartment.Model.Room;
@@ -24,37 +24,32 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UnpayBillFragmentPresenterImpl implements UnpayBillFragmentContract.unpayBillFragmentPresenter {
-
-    private UnpayBillFragmentContract.unpayBillFragmentView view;
-    private List<Bills> listBills = new ArrayList<>();
-    private UnpayBillFragmentAdapterPresenterImpl unpayBillFragmentAdapterPresenter;
+public class ListBillOfRoomFragmentPresenterImpl implements ListBillOfRoomFragmentContract.listBillFragmentPresenter {
+    private ListBillOfRoomFragmentContract.listBillFragmentView view;
+    private List<Bills> listBill = new ArrayList<>();
+    private ListBillOfRoomFragmentAdapterContract.ListBillOfRoomFragmentAdapterPresenter adapterPresenter;
     private BillApi billApi;
 
-    public UnpayBillFragmentPresenterImpl(UnpayBillFragmentContract.unpayBillFragmentView view) {
+    public ListBillOfRoomFragmentPresenterImpl(ListBillOfRoomFragmentContract.listBillFragmentView view) {
         this.view = view;
     }
-
+    public void createAdapter() {
+        adapterPresenter = new ListBillOfRoomFragmentAdapterPresenterImpl(listBill, (List_Bill_Of_Room_Listener) view);
+        view.setAdapter(adapterPresenter);
+    }
     @Override
-    public void inputListUnpayBillData(Context context){
+    public void loadListBillData(String roomId) {
         billApi = GlobalValue.retrofit.create(BillApi.class);
-        SharedPreferences sharedPreferences = context.getSharedPreferences("User",Context.MODE_PRIVATE);
-        String userId=sharedPreferences.getString("id","");
-        getListBill(userId);
+        getListBill(roomId);
     }
-
-    public void createAdapter(){
-        unpayBillFragmentAdapterPresenter = new UnpayBillFragmentAdapterPresenterImpl(listBills, (Unpay_Bill_Listener) view);
-        view.setAdapter(unpayBillFragmentAdapterPresenter);
-    }
-    private void getListBill(String userId){
-        if(listBills != null){
-            if(!listBills.isEmpty()){
-                listBills.clear();
+    private void getListBill(String roomId){
+        if(listBill != null){
+            if(!listBill.isEmpty()){
+                listBill.clear();
             }
         }
         try {
-            Call<JsonElement> call =billApi.getUnpaidBill(userId);
+            Call<JsonElement> call =billApi.getBillByRoom(roomId);
             call.enqueue(new Callback<JsonElement>() {
                 @Override
                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
@@ -75,8 +70,7 @@ public class UnpayBillFragmentPresenterImpl implements UnpayBillFragmentContract
                         User userObj=gsonSP.fromJson(user.toString(),User.class);
                         User managerObj=gsonSP.fromJson(manager.toString(),User.class);
                         Apartment apartmentObj=gsonSP.fromJson(apartment.toString(), Apartment.class);
-//                        Room roomObj=gsonSP.fromJson(room.toString(),Room.class);
-
+//                        Room roomObj=gsonSP.fromJson(room,Room.class);
                         Room roomObj=new Room(room.get("_id").getAsString(),room.get("roomNumber").getAsString(),room.get("code").getAsString(),0,0,room.get("signDate").getAsString(),room.get("expiredDate").getAsString());
                         bill.remove("room");
                         Bills billObj=gsonSP.fromJson(bill.toString(),Bills.class);
@@ -90,7 +84,7 @@ public class UnpayBillFragmentPresenterImpl implements UnpayBillFragmentContract
                         billObj.setExpiredTime(GlobalValue.getDate(Long.parseLong(billObj.getExpiredTime())));
 
 
-                        listBills.add(billObj);
+                        listBill.add(billObj);
                     }
                     createAdapter();
                 }
