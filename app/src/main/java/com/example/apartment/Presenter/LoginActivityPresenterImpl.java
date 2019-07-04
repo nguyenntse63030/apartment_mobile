@@ -54,15 +54,15 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
                 @Override
                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                     JsonElement responseData = response.body();
-                    JsonParser parser= new JsonParser();
+                    JsonParser parser = new JsonParser();
                     JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
-                    if (responseObj.has("user")){
+                    if (responseObj.has("user")) {
                         JsonObject user = responseObj.get("user").getAsJsonObject();
                         String token = responseObj.get("token").getAsString();
 
                         Gson gsonSP = new Gson();
 
-                        User userObj=gsonSP.fromJson(user.toString(),User.class);
+                        User userObj = gsonSP.fromJson(user.toString(), User.class);
                         SharedPreferences.Editor editor = context.getSharedPreferences("User", MODE_PRIVATE).edit();
                         //add token
                         editor.putString("token", token);
@@ -82,9 +82,10 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
                         view.changePage();
 
 
-                    }else {
+                    } else {
                         System.out.println(response);
                     }
+                }
                     @Override
                     public void onFailure(Call<JsonElement> call, Throwable t) {
                         System.out.println(t.getMessage());
@@ -112,3 +113,4 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
         return valid;
     }
 }
+

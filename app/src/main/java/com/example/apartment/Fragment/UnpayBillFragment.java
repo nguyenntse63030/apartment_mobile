@@ -1,5 +1,6 @@
 package com.example.apartment.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.apartment.Activity.BillDetailActivity;
 import com.example.apartment.Adapter.UnpayBillFragmentAdapter;
 import com.example.apartment.Contract.UnpayBillFragmentContract;
 import com.example.apartment.Listener.Unpay_Bill_Listener;
@@ -44,8 +46,10 @@ public class UnpayBillFragment extends Fragment implements UnpayBillFragmentCont
     }
 
     @Override
-    public void onClickUnpayBillItem(Bills bills) {
-        Toast.makeText(getContext(), "Code: " + bills.getCode(), Toast.LENGTH_SHORT).show();
+    public void onClickUnpayBillItem(Bills bill) {
+        Intent intent = new Intent(getContext(), BillDetailActivity.class);
+        intent.putExtra("bill",bill);
+        startActivity(intent);
     }
 
     @Override

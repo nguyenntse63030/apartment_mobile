@@ -1,6 +1,7 @@
 package com.example.apartment.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.apartment.Activity.BillDetailActivity;
 import com.example.apartment.Adapter.ListBillOfRoomFragmentAdapter;
 import com.example.apartment.Adapter.PaidBillFragmentAdapter;
 import com.example.apartment.Contract.ListBillOfRoomFragmentAdapterContract;
@@ -58,7 +60,9 @@ public class ListBillOfRoomFragment extends Fragment implements ListBillOfRoomFr
     }
 
     @Override
-    public void onClickBillItem(Bills bills) {
-        Toast.makeText(getContext(), "Code: " + bills.getCode(), Toast.LENGTH_SHORT).show();
+    public void onClickBillItem(Bills bill) {
+        Intent intent = new Intent(getContext(), BillDetailActivity.class);
+        intent.putExtra("bill",bill);
+        startActivity(intent);
     }
 }
