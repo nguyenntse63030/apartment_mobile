@@ -3,6 +3,8 @@ package com.example.apartment.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -12,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.apartment.Contract.ListBillOfRoomFragmentAdapterContract;
 import com.example.apartment.R;
 
-public class ListBillOfRoomFragmentAdapter extends RecyclerView.Adapter<ListBillOfRoomFragmentAdapter.MyViewHolder> {
+public class ListBillOfRoomFragmentAdapter extends RecyclerView.Adapter<ListBillOfRoomFragmentAdapter.MyViewHolder> implements Filterable {
     private ListBillOfRoomFragmentAdapterContract.ListBillOfRoomFragmentAdapterPresenter presenter;
 
     public ListBillOfRoomFragmentAdapter(ListBillOfRoomFragmentAdapterContract.ListBillOfRoomFragmentAdapterPresenter presenter) {
@@ -41,6 +43,11 @@ public class ListBillOfRoomFragmentAdapter extends RecyclerView.Adapter<ListBill
     @Override
     public int getItemCount() {
         return presenter.returnListBillSize();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return null;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{

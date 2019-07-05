@@ -22,5 +22,86 @@
             android:background="@color/backGroundTaskbar"/>
 
     </androidx.percentlayout.widget.PercentRelativeLayout>
+    <androidx.percentlayout.widget.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="20dp"
+            app:layout_widthPercent="50%"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo_apartment_xin"
+            android:scaleType="centerCrop"/>
+        <androidx.percentlayout.widget.PercentRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_below="@+id/imgLogo"
+            android:paddingStart="10dp">
+
+            <Button
+                android:id="@+id/btnProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_person_outline"
+                android:text="User profile"
+                android:layout_centerHorizontal="true"
+                app:layout_widthPercent="80%"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                app:layout_widthPercent="80%"
+                android:layout_below="@id/btnProfile"
+                android:background="@color/white"/>
+            <Button
+                android:id="@+id/btnDeposit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnProfile"
+                android:textSize="20dp"
+                android:background="@null"
+                android:layout_centerHorizontal="true"
+                app:layout_widthPercent="80%"
+                android:textColor="@color/white"
+                android:drawableStart="@drawable/ic_credit_card"
+                android:text="Deposit account"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                app:layout_widthPercent="80%"
+                android:layout_below="@id/btnDeposit"
+                android:background="@color/white"/>
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnDeposit"
+                android:layout_centerHorizontal="true"
+                app:layout_widthPercent="80%"
+                android:textSize="20dp"
+                android:background="@null"
+                android:textColor="@color/white"
+                android:drawableStart="@drawable/ic_logout_white"
+                android:text="Logout"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                app:layout_widthPercent="80%"
+                android:layout_below="@id/btnLogout"
+                android:background="@color/white"/>
+        </androidx.percentlayout.widget.PercentRelativeLayout>
+
+    </androidx.percentlayout.widget.PercentRelativeLayout>
 
 </LinearLayout>

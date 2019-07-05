@@ -2,9 +2,15 @@ package com.example.apartment.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,17 +26,20 @@ import com.example.apartment.Listener.Room_Listener;
 import com.example.apartment.Model.Room;
 import com.example.apartment.Presenter.ListRoomFragmentPresenterImpl;
 import com.example.apartment.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.Serializable;
 
 public class ListRoomFragment extends Fragment implements ListRoomFragmentContract.listRoomFragmentView, Room_Listener {
     private RecyclerView recyclerView;
+    private TextInputEditText editSearch;
     private ListRoomFragmentAdapter adapter;
     private ListRoomFragmentContract.listRoomFragmentPresenter presenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         presenter = new ListRoomFragmentPresenterImpl(this);
     }
 
@@ -38,15 +47,19 @@ public class ListRoomFragment extends Fragment implements ListRoomFragmentContra
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_room_fragment, container, false);
+
         recyclerView = view.findViewById(R.id.listRoomRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
         presenter.loadListRoomData(getActivity().getApplicationContext());
+        editSearch = view.findViewById(R.id.editSearch);
+        presenter.addActionSearch(editSearch);
         return view;
     }
 
     @Override
     public void setAdapter(ListRoomFragmentAdapterContract.listRoomFragmentAdapterPresenter listNewsFragmentAdapterPresenter) {
         adapter = new ListRoomFragmentAdapter(listNewsFragmentAdapterPresenter);
+        presenter.setAdapter(adapter);
         recyclerView.setAdapter(adapter);
     }
 
@@ -57,5 +70,6 @@ public class ListRoomFragment extends Fragment implements ListRoomFragmentContra
         startActivity(intent);
         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
+
 
 }

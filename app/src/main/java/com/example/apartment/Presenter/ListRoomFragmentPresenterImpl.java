@@ -4,7 +4,10 @@ package com.example.apartment.Presenter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.Editable;
+import android.text.TextWatcher;
 
+import com.example.apartment.Adapter.ListRoomFragmentAdapter;
 import com.example.apartment.Api.RoomApi;
 import com.example.apartment.Contract.ListRoomFragmentAdapterContract;
 import com.example.apartment.Contract.ListRoomFragmentContract;
@@ -13,6 +16,7 @@ import com.example.apartment.Listener.Room_Listener;
 import com.example.apartment.Model.Apartment;
 import com.example.apartment.Model.Room;
 import com.example.apartment.Model.User;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -29,6 +33,7 @@ import retrofit2.Response;
 public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.listRoomFragmentPresenter {
     private List<Room> listRoom = new ArrayList<>();
     private ListRoomFragmentContract.listRoomFragmentView view;
+    private ListRoomFragmentAdapter adapter;
 
     private RoomApi roomApi;
     private ListRoomFragmentAdapterContract.listRoomFragmentAdapterPresenter adapterPresenter;
@@ -36,10 +41,43 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
     public ListRoomFragmentPresenterImpl(ListRoomFragmentContract.listRoomFragmentView view) {
         this.view = view;
     }
+    @Override
+    public void setAdapter(ListRoomFragmentAdapter adapter) {
+        this.adapter = adapter;
+    }
 
+    @Override
+    public void addActionSearch(TextInputEditText editSearch){
+        editSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
+    }
+    private void filter(String text){
+        List<Room> filteredList = new ArrayList<>();
+        for (Room room:listRoom ) {
+            if (room.getCode().toLowerCase().contains(text.toLowerCase().trim())||room.getApartment().getName().toLowerCase().contains(text.toLowerCase().trim())){
+                filteredList.add(room);
+            }
+        }
+        adapterPresenter.setAdapter(adapter);
+        adapterPresenter.filterList(filteredList);
+    }
     //@Override
     private void createAdapter() {
-        adapterPresenter = new ListRoomFragmentAdapterPresenterImpl(listRoom, (Room_Listener) view);
+        adapterPresenter = new ListRoomFragmentAdapterPresenterImpl(listRoom, (Room_Listener) view,adapter);
         view.setAdapter(adapterPresenter);
     }
 

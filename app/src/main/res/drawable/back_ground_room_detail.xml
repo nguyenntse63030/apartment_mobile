@@ -7,8 +7,5 @@
     <corners
         android:radius="15dp"
         />
-    <gradient
-        android:startColor="@color/backGroundTaskbar"
-        android:endColor="@color/backGroundTaskbar"
-        />
+    <solid android:color="@color/backGroundTaskbar" />
 </shape>

@@ -3,6 +3,8 @@ package com.example.apartment.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.apartment.Contract.ListRoomFragmentAdapterContract;
 import com.example.apartment.R;
 
-public class ListRoomFragmentAdapter extends RecyclerView.Adapter<ListRoomFragmentAdapter.MyViewHolder>{
+public class ListRoomFragmentAdapter extends RecyclerView.Adapter<ListRoomFragmentAdapter.MyViewHolder> {
 
     private ListRoomFragmentAdapterContract.listRoomFragmentAdapterPresenter presenter;
 
@@ -41,6 +43,7 @@ public class ListRoomFragmentAdapter extends RecyclerView.Adapter<ListRoomFragme
     public int getItemCount() {
         return presenter.returnListRoomSize();
     }
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView lbRoomNumber, txtApartment, txtRoomID,

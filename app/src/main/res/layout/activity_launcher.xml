@@ -11,11 +11,11 @@
         android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_widthPercent="50%"
-        app:layout_heightPercent="30%"
+        app:layout_widthPercent="60%"
+        app:layout_heightPercent="40%"
         android:layout_centerInParent="true"
-        android:src="@drawable/logo_apartment"
-        android:scaleType="fitXY"/>
+        android:src="@drawable/logo_apartment_xin"
+        android:scaleType="centerCrop"/>
 
     <RelativeLayout
         android:layout_below="@+id/logo"
