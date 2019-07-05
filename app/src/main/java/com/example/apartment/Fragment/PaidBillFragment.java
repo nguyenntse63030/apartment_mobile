@@ -21,9 +21,11 @@ import com.example.apartment.Model.Bills;
 import com.example.apartment.Presenter.PaidBillFragmentAdapterPresenterImpl;
 import com.example.apartment.Presenter.PaidBillFragmentPresenterImpl;
 import com.example.apartment.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class PaidBillFragment extends Fragment implements PaidBillFragmentContract.paidBillFragmentView, Paid_Bill_Listener {
     private RecyclerView recyclerView;
+    private TextInputEditText editSearch;
     private PaidBillFragmentAdapter adapter;
     private PaidBillFragmentPresenterImpl presenter;
 
@@ -39,8 +41,10 @@ public class PaidBillFragment extends Fragment implements PaidBillFragmentContra
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.paid_bill_fragment, container, false);
         recyclerView = view.findViewById(R.id.listPaidBillRecyclerView);
-        presenter.createAdapter();
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+
+        editSearch = view.findViewById(R.id.editPaidBillSearch);
+        presenter.addActionSearch(editSearch);
         return view;
     }
 
@@ -54,6 +58,7 @@ public class PaidBillFragment extends Fragment implements PaidBillFragmentContra
     @Override
     public void setAdapter(PaidBillFragmentAdapterPresenterImpl paidBillFragmentAdapterPresenter) {
         adapter = new PaidBillFragmentAdapter(paidBillFragmentAdapterPresenter);
+        presenter.setAdapter(adapter);
         recyclerView.setAdapter(adapter);
     }
 }

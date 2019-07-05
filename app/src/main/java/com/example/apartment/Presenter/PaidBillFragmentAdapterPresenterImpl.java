@@ -11,6 +11,7 @@ import java.util.List;
 public class PaidBillFragmentAdapterPresenterImpl implements PaidBillFragmentAdapterContract.PaidBillFragmentAdapterPresenter {
     private List<Bills> listPaidBill;
     private Paid_Bill_Listener mCallback;
+    private PaidBillFragmentAdapter adapter;
 
     public PaidBillFragmentAdapterPresenterImpl(List<Bills> listPaidBill, Paid_Bill_Listener mCallback) {
         this.listPaidBill = listPaidBill;
@@ -32,6 +33,17 @@ public class PaidBillFragmentAdapterPresenterImpl implements PaidBillFragmentAda
     public void onClickPaidBillItem(int position) {
         Bills bills = listPaidBill.get(position);
         mCallback.onClickPaidBillItem(bills);
+    }
+
+    @Override
+    public void setAdapter(PaidBillFragmentAdapter adapter) {
+        this.adapter=adapter;
+    }
+
+    @Override
+    public void filterList(List<Bills> filteredList) {
+        listPaidBill = filteredList;
+        adapter.notifyDataSetChanged();
     }
 
     @Override

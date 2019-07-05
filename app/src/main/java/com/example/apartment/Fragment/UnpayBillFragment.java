@@ -21,10 +21,12 @@ import com.example.apartment.Model.Bills;
 import com.example.apartment.Presenter.UnpayBillFragmentAdapterPresenterImpl;
 import com.example.apartment.Presenter.UnpayBillFragmentPresenterImpl;
 import com.example.apartment.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 
 public class UnpayBillFragment extends Fragment implements UnpayBillFragmentContract.unpayBillFragmentView, Unpay_Bill_Listener {
     private UnpayBillFragmentAdapter adapter;
+    private TextInputEditText editSearch;
     private RecyclerView recyclerView;
     private UnpayBillFragmentPresenterImpl presenter;
 
@@ -40,8 +42,9 @@ public class UnpayBillFragment extends Fragment implements UnpayBillFragmentCont
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.unpay_bill_fragment, container, false);
         recyclerView = view.findViewById(R.id.listUnpayBillRecyclerView);
-        presenter.createAdapter();
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        editSearch = view.findViewById(R.id.editUnpaidBillSearch);
+        presenter.addActionSearch(editSearch);
         return view;
     }
 
@@ -55,6 +58,7 @@ public class UnpayBillFragment extends Fragment implements UnpayBillFragmentCont
     @Override
     public void setAdapter(UnpayBillFragmentAdapterPresenterImpl unpayBillFragmentAdapterPresenter) {
         adapter = new UnpayBillFragmentAdapter(unpayBillFragmentAdapterPresenter);
+        presenter.setAdapter(adapter);
         recyclerView.setAdapter(adapter);
     }
 }

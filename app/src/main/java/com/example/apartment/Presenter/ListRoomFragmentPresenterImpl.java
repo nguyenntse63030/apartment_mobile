@@ -33,9 +33,11 @@ import retrofit2.Response;
 public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.listRoomFragmentPresenter {
     private List<Room> listRoom = new ArrayList<>();
     private ListRoomFragmentContract.listRoomFragmentView view;
+    //adapter dùng để thao tác khi người dùng search(không dùng adapter Presenter để thoa tác dc)
     private ListRoomFragmentAdapter adapter;
 
     private RoomApi roomApi;
+    //presenter của adapter
     private ListRoomFragmentAdapterContract.listRoomFragmentAdapterPresenter adapterPresenter;
 
     public ListRoomFragmentPresenterImpl(ListRoomFragmentContract.listRoomFragmentView view) {
@@ -48,6 +50,7 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
 
     @Override
     public void addActionSearch(TextInputEditText editSearch){
+        //add actionText changed listener
         editSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -65,6 +68,7 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
             }
         });
     }
+    //sau khi thay đổi edit text search set lại adapter
     private void filter(String text){
         List<Room> filteredList = new ArrayList<>();
         for (Room room:listRoom ) {

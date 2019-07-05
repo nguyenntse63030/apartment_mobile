@@ -10,9 +10,9 @@ import java.util.List;
 public class ListRoomFragmentAdapterContract {
     public interface listRoomFragmentAdapterPresenter {
         int returnListRoomSize();
-        void setAdapter(ListRoomFragmentAdapter adapter);
         void onClickItemRoom(int position);
         void onBindViewHolder(ListRoomFragmentAdapter.MyViewHolder holder, int position);
+        void setAdapter(ListRoomFragmentAdapter adapter);
         void filterList(List<Room> roomList);
     }
 }

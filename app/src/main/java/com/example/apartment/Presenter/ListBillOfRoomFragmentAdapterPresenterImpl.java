@@ -11,6 +11,7 @@ import java.util.List;
 public class ListBillOfRoomFragmentAdapterPresenterImpl implements ListBillOfRoomFragmentAdapterContract.ListBillOfRoomFragmentAdapterPresenter {
     private List<Bills> listBill;
     private List_Bill_Of_Room_Listener listener;
+    private ListBillOfRoomFragmentAdapter adapter;
 
     public ListBillOfRoomFragmentAdapterPresenterImpl(List<Bills> listBill, List_Bill_Of_Room_Listener listener) {
         this.listBill = listBill;
@@ -37,5 +38,16 @@ public class ListBillOfRoomFragmentAdapterPresenterImpl implements ListBillOfRoo
     public void onClickBillItem(int position) {
         Bills bill = listBill.get(position);
         listener.onClickBillItem(bill);
+    }
+
+    @Override
+    public void setAdapter(ListBillOfRoomFragmentAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    @Override
+    public void filterList(List<Bills> filteredList) {
+        listBill = filteredList;
+        adapter.notifyDataSetChanged();
     }
 }

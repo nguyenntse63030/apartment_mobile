@@ -2,7 +2,10 @@ package com.example.apartment.Presenter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.Editable;
+import android.text.TextWatcher;
 
+import com.example.apartment.Adapter.UnpayBillFragmentAdapter;
 import com.example.apartment.Api.BillApi;
 import com.example.apartment.Contract.UnpayBillFragmentContract;
 import com.example.apartment.Global.GlobalValue;
@@ -11,6 +14,7 @@ import com.example.apartment.Model.Apartment;
 import com.example.apartment.Model.Bills;
 import com.example.apartment.Model.Room;
 import com.example.apartment.Model.User;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -28,11 +32,51 @@ public class UnpayBillFragmentPresenterImpl implements UnpayBillFragmentContract
 
     private UnpayBillFragmentContract.unpayBillFragmentView view;
     private List<Bills> listBills = new ArrayList<>();
+    //adapter dùng để thao tác khi người dùng search(không dùng adapter Presenter để thoa tác dc)
+    private UnpayBillFragmentAdapter adapter;
     private UnpayBillFragmentAdapterPresenterImpl unpayBillFragmentAdapterPresenter;
     private BillApi billApi;
 
     public UnpayBillFragmentPresenterImpl(UnpayBillFragmentContract.unpayBillFragmentView view) {
         this.view = view;
+    }
+
+    @Override
+    public void setAdapter(UnpayBillFragmentAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    @Override
+    public void addActionSearch(TextInputEditText editSearch) {
+        editSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
+    }
+    private void filter(String text){
+        List<Bills> filteredList = new ArrayList<>();
+        for (Bills bill:listBills ) {
+            if (bill.getType().toLowerCase().contains(text.toLowerCase().trim())
+                    ||bill.getCreatedTime().toLowerCase().contains(text.toLowerCase().trim())
+                    ||bill.getExpiredTime().toLowerCase().contains(text.toLowerCase().trim())
+                    ||bill.getRoom().getRoomNumber().toLowerCase().contains(text.toLowerCase().trim())){
+                filteredList.add(bill);
+            }
+        }
+        unpayBillFragmentAdapterPresenter.setAdapter(adapter);
+        unpayBillFragmentAdapterPresenter.filterList(filteredList);
     }
 
     @Override

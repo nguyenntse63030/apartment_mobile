@@ -12,19 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.apartment.Activity.BillDetailActivity;
 import com.example.apartment.Adapter.ListBillOfRoomFragmentAdapter;
-import com.example.apartment.Adapter.PaidBillFragmentAdapter;
 import com.example.apartment.Contract.ListBillOfRoomFragmentAdapterContract;
 import com.example.apartment.Contract.ListBillOfRoomFragmentContract;
 import com.example.apartment.Listener.List_Bill_Of_Room_Listener;
 import com.example.apartment.Model.Bills;
 import com.example.apartment.Model.Room;
-import com.example.apartment.Presenter.ListBillOfRoomFragmentAdapterPresenterImpl;
 import com.example.apartment.Presenter.ListBillOfRoomFragmentPresenterImpl;
 import com.example.apartment.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +30,7 @@ import com.example.apartment.R;
 public class ListBillOfRoomFragment extends Fragment implements ListBillOfRoomFragmentContract.listBillFragmentView, List_Bill_Of_Room_Listener {
 
     private RecyclerView recyclerView;
+    private TextInputEditText editSearch;
     private ListBillOfRoomFragmentAdapter adapter;
     private ListBillOfRoomFragmentContract.listBillFragmentPresenter presenter;
 
@@ -47,15 +46,20 @@ public class ListBillOfRoomFragment extends Fragment implements ListBillOfRoomFr
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.paid_bill_fragment, container, false);
-        recyclerView = view.findViewById(R.id.listPaidBillRecyclerView);
+        View view = inflater.inflate(R.layout.fragment_list_bill_of_room, container, false);
+        recyclerView = view.findViewById(R.id.listBillOfRoomRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        //add action cho editSearch
+        editSearch = view.findViewById(R.id.editBillOfRoomSearch);
+        presenter.addActionSearch(editSearch);
+
         return view;
     }
 
     @Override
     public void setAdapter(ListBillOfRoomFragmentAdapterContract.ListBillOfRoomFragmentAdapterPresenter listBillOfRoomFragmentAdapterPresenter) {
         adapter = new ListBillOfRoomFragmentAdapter(listBillOfRoomFragmentAdapterPresenter);
+        presenter.setAdapter(adapter);
         recyclerView.setAdapter(adapter);
     }
 

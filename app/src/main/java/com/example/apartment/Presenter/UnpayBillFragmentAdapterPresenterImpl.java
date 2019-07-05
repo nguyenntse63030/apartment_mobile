@@ -8,8 +8,9 @@ import com.example.apartment.Model.Bills;
 import java.util.List;
 
 public class UnpayBillFragmentAdapterPresenterImpl implements UnpayBillFragmentAdapterContract.unpayBillFragmentAdapterPresenter {
-    List<Bills> listBills;
-    Unpay_Bill_Listener mCallback;
+    private List<Bills> listBills;
+    private Unpay_Bill_Listener mCallback;
+    private UnpayBillFragmentAdapter adapter;
 
     public UnpayBillFragmentAdapterPresenterImpl(List<Bills> listBills, Unpay_Bill_Listener mCallback) {
         this.listBills = listBills;
@@ -37,5 +38,16 @@ public class UnpayBillFragmentAdapterPresenterImpl implements UnpayBillFragmentA
 
         Bills bill = listBills.get(position);
         mCallback.onClickUnpayBillItem(bill);
+    }
+
+    @Override
+    public void setAdapter(UnpayBillFragmentAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    @Override
+    public void filterList(List<Bills> filteredList) {
+        listBills = filteredList;
+        adapter.notifyDataSetChanged();
     }
 }

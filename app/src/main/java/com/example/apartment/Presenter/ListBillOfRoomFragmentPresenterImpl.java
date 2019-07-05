@@ -2,6 +2,10 @@ package com.example.apartment.Presenter;
 
 
 
+import android.text.Editable;
+import android.text.TextWatcher;
+
+import com.example.apartment.Adapter.ListBillOfRoomFragmentAdapter;
 import com.example.apartment.Api.BillApi;
 import com.example.apartment.Contract.ListBillOfRoomFragmentAdapterContract;
 import com.example.apartment.Contract.ListBillOfRoomFragmentContract;
@@ -11,6 +15,7 @@ import com.example.apartment.Model.Apartment;
 import com.example.apartment.Model.Bills;
 import com.example.apartment.Model.Room;
 import com.example.apartment.Model.User;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -27,6 +32,8 @@ import retrofit2.Response;
 public class ListBillOfRoomFragmentPresenterImpl implements ListBillOfRoomFragmentContract.listBillFragmentPresenter {
     private ListBillOfRoomFragmentContract.listBillFragmentView view;
     private List<Bills> listBill = new ArrayList<>();
+    //adapter dùng để thao tác khi người dùng search(không dùng adapter Presenter để thoa tác dc)
+    private ListBillOfRoomFragmentAdapter adapter;
     private ListBillOfRoomFragmentAdapterContract.ListBillOfRoomFragmentAdapterPresenter adapterPresenter;
     private BillApi billApi;
 
@@ -37,6 +44,45 @@ public class ListBillOfRoomFragmentPresenterImpl implements ListBillOfRoomFragme
         adapterPresenter = new ListBillOfRoomFragmentAdapterPresenterImpl(listBill, (List_Bill_Of_Room_Listener) view);
         view.setAdapter(adapterPresenter);
     }
+
+    @Override
+    public void setAdapter(ListBillOfRoomFragmentAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    @Override
+    public void addActionSearch(TextInputEditText editSearch) {
+        editSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
+    }
+    private void filter(String text){
+        List<Bills> filteredList = new ArrayList<>();
+        for (Bills bill:listBill ) {
+            if (bill.getType().toLowerCase().contains(text.toLowerCase().trim())
+                    ||bill.getCreatedTime().toLowerCase().contains(text.toLowerCase().trim())
+                    ||bill.getExpiredTime().toLowerCase().contains(text.toLowerCase().trim())
+                    ||bill.getStatus().toLowerCase().contains(text.toLowerCase().trim())){
+                filteredList.add(bill);
+            }
+        }
+        adapterPresenter.setAdapter(adapter);
+        adapterPresenter.filterList(filteredList);
+    }
+
     @Override
     public void loadListBillData(String roomId) {
         billApi = GlobalValue.retrofit.create(BillApi.class);

@@ -13,7 +13,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".Activity.BillDetailActivity"></activity>
-        <activity android:name=".Activity.RoomDetailActivity" />
+        <activity
+            android:name=".Activity.RoomDetailActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Activity.NewsDetailActivity"
             android:screenOrientation="portrait" />
