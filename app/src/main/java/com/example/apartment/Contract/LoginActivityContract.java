@@ -8,9 +8,10 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginActivityContract {
     public interface LoginActivityPresenter{
-        public void login(TextInputEditText phone, TextInputEditText password, Context context);
+        void login(TextInputEditText phone, TextInputEditText password, Context context);
+        void onActivityResult(int requestCode, int resultCode, Intent data);
     }
     public interface  LoginActivityView{
-        public void changePage();
+        void changePage();
     }
 }

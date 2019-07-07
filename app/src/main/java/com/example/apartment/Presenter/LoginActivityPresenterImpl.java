@@ -3,13 +3,27 @@ package com.example.apartment.Presenter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.example.apartment.Activity.LoginActivity;
 import com.example.apartment.Api.UserApi;
 import com.example.apartment.Contract.LoginActivityContract;
 import com.example.apartment.Global.GlobalValue;
 import com.example.apartment.Model.User;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -28,9 +42,17 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class LoginActivityPresenterImpl implements LoginActivityContract.LoginActivityPresenter {
     private UserApi userApi;
-    private LoginActivityContract.LoginActivityView view;
+//    private LoginActivityContract.LoginActivityView view;
+    private LoginActivity view;
+    private int RC_SIGN_IN=1;
+    private String TAG="LoginActivity";
 
-    public LoginActivityPresenterImpl(LoginActivityContract.LoginActivityView view) {
+//    public LoginActivityPresenterImpl(LoginActivityContract.LoginActivityView view) {
+//        this.view = view;
+//    }
+
+
+    public LoginActivityPresenterImpl(LoginActivity view) {
         this.view = view;
     }
 
@@ -97,6 +119,108 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+                Log.w(TAG, "Google sign in failed", e);
+                // ...
+            }
+        }
+    }
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        GlobalValue.mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(view, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = GlobalValue.mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+//                            Snackbar.make(findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
+                            Toast.makeText(view, "Sign in with google failed", Toast.LENGTH_SHORT).show();
+//                            updateUI(null);
+                        }
+                    }
+                });
+    }
+
+    private void updateUI(FirebaseUser user) {
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(view);
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+            String personGivenName = acct.getGivenName();
+            String personFamilyName = acct.getFamilyName();
+            String personEmail = acct.getEmail();
+            String personId = acct.getId();
+            Uri personPhoto = acct.getPhotoUrl();
+            Toast.makeText(view, "User name"+personName+"person email:"+personEmail, Toast.LENGTH_SHORT).show();
+            userApi = GlobalValue.retrofit.create(UserApi.class);
+            Map<String,String> data= new HashMap<>();
+            data.put("email",personEmail);
+            data.put("personFamilyName",personFamilyName);
+            data.put("personGivenName",personGivenName);
+            data.put("personPhoto",personPhoto.toString());
+
+            Call<JsonElement> call =userApi.verifyGoogle(data);
+            call.enqueue(new Callback<JsonElement>() {
+                @Override
+                public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                    JsonElement responseData = response.body();
+                    JsonParser parser = new JsonParser();
+                    JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
+                    if (responseObj.get("status").getAsString().equalsIgnoreCase("200")) {
+                        JsonObject user = responseObj.get("user").getAsJsonObject();
+                        String token = responseObj.get("token").getAsString();
+
+                        Gson gsonSP = new Gson();
+
+                        User userObj = gsonSP.fromJson(user.toString(), User.class);
+                        SharedPreferences.Editor editor = view.getSharedPreferences("User", MODE_PRIVATE).edit();
+                        //add token
+                        editor.putString("token", token);
+                        //add profile user
+                        editor.putString("name", userObj.getName());
+                        editor.putString("id", userObj.getId());
+                        editor.putString("gender", userObj.getGender());
+                        editor.putString("mail", userObj.getEmail());
+                        editor.putString("phone", userObj.getPhone());
+                        editor.putString("birthDay", userObj.getDateOfBirth());
+                        editor.putString("address", userObj.getAddress());
+                        editor.putString("code", userObj.getCode());
+                        editor.putString("createTime", userObj.getCreatedTime());
+                        editor.putString("photoURL", userObj.getPhotoURL());
+
+                        editor.apply();
+                        view.changePage();
+
+
+                    } else {
+                        System.out.println(response);
+                    }
+                }
+                @Override
+                public void onFailure(Call<JsonElement> call, Throwable t) {
+                    System.out.println(t.getMessage());
+                }
+            });
+        }
+    }
+
 
     private boolean checkValid(TextInputEditText editPhone, TextInputEditText editPassword, String phone, String password) {
         boolean valid = true;

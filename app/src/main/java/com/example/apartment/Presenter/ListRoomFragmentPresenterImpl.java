@@ -106,30 +106,33 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
                     JsonElement responseData = response.body();
                     JsonParser parser= new JsonParser();
                     JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
-                    JsonArray rooms = responseObj.get("listRoom").getAsJsonArray();
+                    if (responseObj.get("status").getAsString().equalsIgnoreCase("200")){
+                        JsonArray rooms = responseObj.get("listRoom").getAsJsonArray();
 
-                    for (int i = 0;i < rooms.size();i++){
-                        JsonObject room = rooms.get(i).getAsJsonObject();
-                        JsonObject user = room.get("user").getAsJsonObject();
-                        JsonObject apartment = room.get("apartment").getAsJsonObject();
+                        for (int i = 0;i < rooms.size();i++){
+                            JsonObject room = rooms.get(i).getAsJsonObject();
+                            JsonObject user = room.get("user").getAsJsonObject();
+                            JsonObject apartment = room.get("apartment").getAsJsonObject();
 
-                        Gson gsonSP = new Gson();
+                            Gson gsonSP = new Gson();
 
-                        User userObj=gsonSP.fromJson(user.toString(),User.class);
-                        Apartment apartmentObj=gsonSP.fromJson(apartment.toString(), Apartment.class);
-                        Room roomObj=gsonSP.fromJson(room.toString(),Room.class);
+                            User userObj=gsonSP.fromJson(user.toString(),User.class);
+                            Apartment apartmentObj=gsonSP.fromJson(apartment.toString(), Apartment.class);
+                            Room roomObj=gsonSP.fromJson(room.toString(),Room.class);
 
-                        roomObj.setUser(userObj);
-                        roomObj.setApartment(apartmentObj);
-                        roomObj.setSignDate(GlobalValue.getDate(Long.parseLong(roomObj.getSignDate())));
+                            roomObj.setUser(userObj);
+                            roomObj.setApartment(apartmentObj);
+                            roomObj.setSignDate(GlobalValue.getDate(Long.parseLong(roomObj.getSignDate())));
 
-                        if (!roomObj.getExpiredDate().equals("0"))
-                        {
-                            roomObj.setExpiredDate(GlobalValue.getDate(Long.parseLong(roomObj.getExpiredDate())));
+                            if (!roomObj.getExpiredDate().equals("0"))
+                            {
+                                roomObj.setExpiredDate(GlobalValue.getDate(Long.parseLong(roomObj.getExpiredDate())));
+                            }
+                            listRoom.add(roomObj);
                         }
-                        listRoom.add(roomObj);
+                        createAdapter();
                     }
-                    createAdapter();
+
                 }
                 @Override
                 public void onFailure(Call<JsonElement> call, Throwable t) {

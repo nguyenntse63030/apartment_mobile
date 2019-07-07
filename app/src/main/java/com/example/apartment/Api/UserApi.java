@@ -21,4 +21,10 @@ public interface UserApi {
     })
     @POST("auth/sign_in")
     Call<JsonElement> verify(@Body Map<String,String> data);
+//    https://apartmentswd391.herokuapp.com/api/v1/auth/google
+    @Headers({
+            "Content-Type:application/json"
+    })
+    @POST("auth/verifyGoogle")
+    Call<JsonElement> verifyGoogle(@Body Map<String,String> data);
 }

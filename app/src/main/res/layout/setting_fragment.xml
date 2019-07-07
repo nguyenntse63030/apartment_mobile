@@ -54,7 +54,7 @@
                 android:layout_centerHorizontal="true"
                 app:layout_widthPercent="80%"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="17dp" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -67,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btnProfile"
-                android:textSize="20dp"
+                android:textSize="17dp"
                 android:background="@null"
                 android:layout_centerHorizontal="true"
                 app:layout_widthPercent="80%"
@@ -88,7 +88,7 @@
                 android:layout_below="@+id/btnDeposit"
                 android:layout_centerHorizontal="true"
                 app:layout_widthPercent="80%"
-                android:textSize="20dp"
+                android:textSize="17dp"
                 android:background="@null"
                 android:textColor="@color/white"
                 android:drawableStart="@drawable/ic_logout_white"

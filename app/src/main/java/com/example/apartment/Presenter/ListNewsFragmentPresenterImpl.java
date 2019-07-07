@@ -47,20 +47,23 @@ public class ListNewsFragmentPresenterImpl implements ListNewsFragmentContract.l
                     JsonParser parser = new JsonParser();
 
                     JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
-                    JsonArray listNewsAPI = responseObj.get("listNews").getAsJsonArray();
+                    if (responseObj.get("status").getAsString().equalsIgnoreCase("200")){
+                        JsonArray listNewsAPI = responseObj.get("listNews").getAsJsonArray();
 
-                    for (int i = 0;i < listNewsAPI.size();i++){
-                        JsonObject news = listNewsAPI.get(i).getAsJsonObject();
-                        Gson gsonSP = new Gson();
+                        for (int i = 0;i < listNewsAPI.size();i++){
+                            JsonObject news = listNewsAPI.get(i).getAsJsonObject();
+                            Gson gsonSP = new Gson();
 
-                        News newsObj = gsonSP.fromJson(news.toString(),News.class);
-                        newsObj.setDateOfNews(GlobalValue.getDate(Long.parseLong(newsObj.getDateOfNews())));
+                            News newsObj = gsonSP.fromJson(news.toString(),News.class);
+                            newsObj.setDateOfNews(GlobalValue.getDate(Long.parseLong(newsObj.getDateOfNews())));
 
-                        listNews.add(newsObj);
+                            listNews.add(newsObj);
+                        }
+
+                        listNewsFragmentAdapterPresenter = new ListNewsFragmentAdapterPresenterImpl(listNews, (List_News_Listener) view);
+                        view.setAdapter(listNewsFragmentAdapterPresenter);
                     }
 
-                    listNewsFragmentAdapterPresenter = new ListNewsFragmentAdapterPresenterImpl(listNews, (List_News_Listener) view);
-                    view.setAdapter(listNewsFragmentAdapterPresenter);
                 }
                 @Override
                 public void onFailure(Call<JsonElement> call, Throwable t) {

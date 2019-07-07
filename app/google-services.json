@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "907243972129",
+    "firebase_url": "https://apartment-f5a24.firebaseio.com",
+    "project_id": "apartment-f5a24",
+    "storage_bucket": "apartment-f5a24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907243972129:android:7945106a13f9d276",
+        "android_client_info": {
+          "package_name": "com.example.apartment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907243972129-k592cgaeo4h3fl55levnfcht9hbonbes.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.apartment",
+            "certificate_hash": "0fa0a3f075f329227306f4197a3164d0d8477465"
+          }
+        },
+        {
+          "client_id": "907243972129-vvkpc50ogarhaj166ic7riuova4vuqnb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg4NsPUZ28atS5qES4ffKKXqofmWgwMbs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907243972129-vvkpc50ogarhaj166ic7riuova4vuqnb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

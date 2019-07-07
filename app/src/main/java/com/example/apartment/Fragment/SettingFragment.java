@@ -12,7 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.apartment.Activity.DepositAccountActivity;
 import com.example.apartment.Activity.LoginActivity;
+import com.example.apartment.Activity.ProfileActivity;
+import com.example.apartment.Global.GlobalValue;
 import com.example.apartment.R;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -32,6 +35,20 @@ public class SettingFragment extends Fragment {
         btnProfile = view.findViewById(R.id.btnProfile);
         btnDeposit = view.findViewById(R.id.btnDeposit);
         btnLogout = view.findViewById(R.id.btnLogout);
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnDeposit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), DepositAccountActivity.class);
+                startActivity(intent);
+            }
+        });
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,7 +67,7 @@ public class SettingFragment extends Fragment {
                 editor.remove("createTime");
                 editor.remove("photoURL");
                 editor.apply();
-
+                GlobalValue.mAuth.signOut();
                 //Back to login page
                 Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
                 startActivity(intent);

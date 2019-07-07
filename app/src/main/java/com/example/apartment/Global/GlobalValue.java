@@ -2,6 +2,8 @@ package com.example.apartment.Global;
 
 import android.text.format.DateFormat;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -11,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class GlobalValue {
 
     public static final int SPINER_LOADING_TIME_OUT = 2000;
-
+    public static FirebaseAuth mAuth;
 
     public static final Retrofit retrofit=new Retrofit.Builder()
              .baseUrl("http://192.168.0.104:1998/api/v1/")
