@@ -10,7 +10,13 @@
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/ic_keyboard_arrow_left_white_24dp"
+            android:onClick="clickToBack"
+            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,7 +72,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"
                 />
-            <EditText
+            <TextView
                 android:id="@+id/txtFullName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,11 +84,12 @@
                 android:textStyle="bold"
                 />
             <View
+                android:id="@+id/viewFullName"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_centerHorizontal="true"
                 app:layout_widthPercent="95%"
-                android:layout_below="@id/lbFullName"
+                android:layout_below="@id/txtFullName"
                 android:background="@color/white"/>
             <TextView
                 android:id="@+id/lbGendar"
@@ -92,7 +99,7 @@
                 app:layout_widthPercent="30%"
                 android:textColor="@color/white"
                 android:layout_margin="5dp"
-                android:layout_below="@id/lbFullName"
+                android:layout_below="@id/viewFullName"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 />
@@ -106,14 +113,15 @@
                 android:layout_toRightOf="@+id/lbGendar"
                 android:layout_margin="5dp"
                 android:textStyle="bold"
-                android:layout_below="@+id/txtFullName"
+                android:layout_below="@+id/viewFullName"
                 />
             <View
+                android:id="@+id/viewGendar"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_centerHorizontal="true"
                 app:layout_widthPercent="95%"
-                android:layout_below="@id/lbGendar"
+                android:layout_below="@id/txtGendar"
                 android:background="@color/white"/>
             <TextView
                 android:id="@+id/lbPhone"
@@ -123,7 +131,7 @@
                 app:layout_widthPercent="30%"
                 android:layout_margin="5dp"
                 android:textColor="@color/white"
-                android:layout_below="@id/lbGendar"
+                android:layout_below="@id/viewGendar"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 />
@@ -136,15 +144,16 @@
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                android:layout_below="@+id/txtGendar"
+                android:layout_below="@+id/viewGendar"
                 android:layout_toRightOf="@id/lbFullName"
                 />
             <View
+                android:id="@+id/viewPhone"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_centerHorizontal="true"
                 app:layout_widthPercent="95%"
-                android:layout_below="@id/lbPhone"
+                android:layout_below="@id/txtPhone"
                 android:background="@color/white"/>
             <TextView
                 android:id="@+id/lbEmail"
@@ -154,7 +163,7 @@
                 android:layout_margin="5dp"
                 app:layout_widthPercent="30%"
                 android:textColor="@color/white"
-                android:layout_below="@id/lbPhone"
+                android:layout_below="@id/viewPhone"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 />
@@ -168,14 +177,15 @@
                 android:textSize="20dp"
                 android:layout_toRightOf="@id/lbFullName"
                 android:textStyle="bold"
-                android:layout_below="@+id/txtPhone"
+                android:layout_below="@+id/viewPhone"
                 />
             <View
+                android:id="@+id/viewEmail"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_centerHorizontal="true"
                 app:layout_widthPercent="95%"
-                android:layout_below="@id/lbEmail"
+                android:layout_below="@id/txtEmail"
                 android:background="@color/white"/>
             <TextView
                 android:id="@+id/lbBirth"
@@ -185,7 +195,7 @@
                 app:layout_widthPercent="30%"
                 android:textColor="@color/white"
                 android:layout_margin="5dp"
-                android:layout_below="@id/lbEmail"
+                android:layout_below="@id/viewEmail"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 />
@@ -199,7 +209,7 @@
                 android:textSize="20dp"
                 android:layout_toRightOf="@id/lbFullName"
                 android:textStyle="bold"
-                android:layout_below="@+id/txtEmail"
+                android:layout_below="@+id/viewEmail"
                 />
             <View
                 android:layout_width="match_parent"
