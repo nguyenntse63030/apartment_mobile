@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.Toast;
 
 import com.example.apartment.Adapter.ListRoomFragmentAdapter;
 import com.example.apartment.Api.RoomApi;
@@ -22,6 +23,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,23 +93,25 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
         roomApi = GlobalValue.retrofit.create(RoomApi.class);
         SharedPreferences sharedPreferences = context.getSharedPreferences("User",Context.MODE_PRIVATE);
         String userId=sharedPreferences.getString("id","");
-        getListRoom(userId);
+        getListRoom(userId,context);
     }
-    private void getListRoom(String userId){
+    private void getListRoom(String userId, final Context context){
         if(listRoom != null){
             if(!listRoom.isEmpty()){
                 listRoom.clear();
             }
         }
         try {
-            Call<JsonElement> call =roomApi.getRoomByUser(userId);
+            SharedPreferences sharedPreferences = context.getSharedPreferences("User",Context.MODE_PRIVATE);
+            String token = sharedPreferences.getString("token","");
+            Call<JsonElement> call =roomApi.getRoomByUser(token,userId);
             call.enqueue(new Callback<JsonElement>() {
                 @Override
                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                    JsonElement responseData = response.body();
-                    JsonParser parser= new JsonParser();
-                    JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
-                    if (responseObj.get("status").getAsString().equalsIgnoreCase("200")){
+                    if (response.code()==200){
+                        JsonElement responseData = response.body();
+                        JsonParser parser= new JsonParser();
+                        JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
                         JsonArray rooms = responseObj.get("listRoom").getAsJsonArray();
 
                         for (int i = 0;i < rooms.size();i++){
@@ -131,6 +136,14 @@ public class ListRoomFragmentPresenterImpl implements ListRoomFragmentContract.l
                             listRoom.add(roomObj);
                         }
                         createAdapter();
+                    }else{
+                        try {
+                            JSONObject errorBody=new JSONObject(response.errorBody().string());
+                            Toast.makeText(context, errorBody.getString("errorMessage"), Toast.LENGTH_SHORT).show();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
 
                 }

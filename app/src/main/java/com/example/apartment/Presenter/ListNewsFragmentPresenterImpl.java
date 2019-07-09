@@ -1,6 +1,10 @@
 package com.example.apartment.Presenter;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.widget.Toast;
+
 import com.example.apartment.Api.NewsApi;
 import com.example.apartment.Contract.ListNewsFragmentContract;
 import com.example.apartment.Global.GlobalValue;
@@ -12,6 +16,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +37,7 @@ public class ListNewsFragmentPresenterImpl implements ListNewsFragmentContract.l
     }
 
     @Override
-    public void loadListNewsData() {
+    public void loadListNewsData(final Context context) {
         if(listNews != null){
             if(!listNews.isEmpty()){
                 listNews.clear();
@@ -38,16 +45,18 @@ public class ListNewsFragmentPresenterImpl implements ListNewsFragmentContract.l
         }
         newsApi = GlobalValue.retrofit.create(NewsApi.class);
         try {
-            Call<JsonElement> call = newsApi.getNews();
+            SharedPreferences sharedPreferences = context.getSharedPreferences("User",Context.MODE_PRIVATE);
+            String token = sharedPreferences.getString("token","");
+            Call<JsonElement> call = newsApi.getNews(token);
             call.enqueue(new Callback<JsonElement>() {
                 @Override
                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
 
-                    JsonElement responseData = response.body();
-                    JsonParser parser = new JsonParser();
 
-                    JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
-                    if (responseObj.get("status").getAsString().equalsIgnoreCase("200")){
+                    if (response.code()==200){
+                        JsonElement responseData = response.body();
+                        JsonParser parser = new JsonParser();
+                        JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
                         JsonArray listNewsAPI = responseObj.get("listNews").getAsJsonArray();
 
                         for (int i = 0;i < listNewsAPI.size();i++){
@@ -62,6 +71,14 @@ public class ListNewsFragmentPresenterImpl implements ListNewsFragmentContract.l
 
                         listNewsFragmentAdapterPresenter = new ListNewsFragmentAdapterPresenterImpl(listNews, (List_News_Listener) view);
                         view.setAdapter(listNewsFragmentAdapterPresenter);
+                    }else{
+                        try {
+                            JSONObject errorBody=new JSONObject(response.errorBody().string());
+                            Toast.makeText(context, errorBody.getString("errorMessage"), Toast.LENGTH_SHORT).show();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
 
                 }

@@ -41,7 +41,7 @@ public class ListNewsFragment extends Fragment implements ListNewsFragmentContra
         View view = inflater.inflate(R.layout.list_news_fragment, container, false);
         recyclerView = view.findViewById(R.id.listNewsRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        presenter.loadListNewsData();
+        presenter.loadListNewsData(getActivity().getApplicationContext());
         return view;
     }
 

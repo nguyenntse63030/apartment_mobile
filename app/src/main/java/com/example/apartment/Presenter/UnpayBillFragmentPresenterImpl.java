@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.Toast;
 
 import com.example.apartment.Adapter.UnpayBillFragmentAdapter;
 import com.example.apartment.Api.BillApi;
@@ -20,6 +21,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,28 +87,30 @@ public class UnpayBillFragmentPresenterImpl implements UnpayBillFragmentContract
         billApi = GlobalValue.retrofit.create(BillApi.class);
         SharedPreferences sharedPreferences = context.getSharedPreferences("User",Context.MODE_PRIVATE);
         String userId=sharedPreferences.getString("id","");
-        getListBill(userId);
+        getListBill(userId,context);
     }
 
     public void createAdapter(){
         unpayBillFragmentAdapterPresenter = new UnpayBillFragmentAdapterPresenterImpl(listBills, (Unpay_Bill_Listener) view);
         view.setAdapter(unpayBillFragmentAdapterPresenter);
     }
-    private void getListBill(String userId){
+    private void getListBill(String userId, final Context context){
         if(listBills != null){
             if(!listBills.isEmpty()){
                 listBills.clear();
             }
         }
         try {
-            Call<JsonElement> call =billApi.getUnpaidBill(userId);
+            SharedPreferences sharedPreferences = context.getSharedPreferences("User",Context.MODE_PRIVATE);
+            String token = sharedPreferences.getString("token","");
+            Call<JsonElement> call =billApi.getUnpaidBill(token,userId);
             call.enqueue(new Callback<JsonElement>() {
                 @Override
                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                    JsonElement responseData = response.body();
-                    JsonParser parser= new JsonParser();
-                    JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
-                    if (responseObj.get("status").getAsString().equalsIgnoreCase("200")){
+                    if (response.code()==200){
+                        JsonElement responseData = response.body();
+                        JsonParser parser= new JsonParser();
+                        JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
                         JsonArray bills = responseObj.get("listBill").getAsJsonArray();
 
                         for (int i = 0;i < bills.size();i++){
@@ -138,6 +143,14 @@ public class UnpayBillFragmentPresenterImpl implements UnpayBillFragmentContract
                             listBills.add(billObj);
                         }
                         createAdapter();
+                    }else{
+                        try {
+                            JSONObject errorBody=new JSONObject(response.errorBody().string());
+                            Toast.makeText(context, errorBody.getString("errorMessage"), Toast.LENGTH_SHORT).show();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
 
                 }

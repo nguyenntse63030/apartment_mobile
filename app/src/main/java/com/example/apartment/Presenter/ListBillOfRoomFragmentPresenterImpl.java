@@ -2,8 +2,11 @@ package com.example.apartment.Presenter;
 
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.Toast;
 
 import com.example.apartment.Adapter.ListBillOfRoomFragmentAdapter;
 import com.example.apartment.Api.BillApi;
@@ -21,6 +24,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,25 +89,27 @@ public class ListBillOfRoomFragmentPresenterImpl implements ListBillOfRoomFragme
     }
 
     @Override
-    public void loadListBillData(String roomId) {
+    public void loadListBillData(String roomId, Context context) {
         billApi = GlobalValue.retrofit.create(BillApi.class);
-        getListBill(roomId);
+        getListBill(roomId,context);
     }
-    private void getListBill(String roomId){
+    private void getListBill(String roomId, final Context context){
         if(listBill != null){
             if(!listBill.isEmpty()){
                 listBill.clear();
             }
         }
         try {
-            Call<JsonElement> call =billApi.getBillByRoom(roomId);
+            SharedPreferences sharedPreferences = context.getSharedPreferences("User",Context.MODE_PRIVATE);
+            String token = sharedPreferences.getString("token","");
+            Call<JsonElement> call =billApi.getBillByRoom(token,roomId);
             call.enqueue(new Callback<JsonElement>() {
                 @Override
                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                    JsonElement responseData = response.body();
-                    JsonParser parser= new JsonParser();
-                    JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
-                    if (responseObj.get("status").getAsString().equalsIgnoreCase("200")){
+                    if (response.code()==200){
+                        JsonElement responseData = response.body();
+                        JsonParser parser= new JsonParser();
+                        JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
                         JsonArray bills = responseObj.get("listBill").getAsJsonArray();
 
                         for (int i = 0;i < bills.size();i++){
@@ -134,6 +141,14 @@ public class ListBillOfRoomFragmentPresenterImpl implements ListBillOfRoomFragme
                             listBill.add(billObj);
                         }
                         createAdapter();
+                    }else {
+                        try {
+                            JSONObject errorBody=new JSONObject(response.errorBody().string());
+                            Toast.makeText(context, errorBody.getString("errorMessage"), Toast.LENGTH_SHORT).show();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
 
                 }

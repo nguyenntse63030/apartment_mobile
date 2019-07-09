@@ -40,7 +40,7 @@ public class ListBillOfRoomFragment extends Fragment implements ListBillOfRoomFr
         super.onCreate(savedInstanceState);
         presenter = new ListBillOfRoomFragmentPresenterImpl(this);
         Room room = (Room) getActivity().getIntent().getSerializableExtra("room");
-        presenter.loadListBillData(room.getId());
+        presenter.loadListBillData(room.getId(),getActivity().getApplicationContext());
     }
 
     @Override

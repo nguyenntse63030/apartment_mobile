@@ -10,7 +10,7 @@ public class ListBillOfRoomFragmentContract {
     public interface listBillFragmentPresenter{
         void setAdapter(ListBillOfRoomFragmentAdapter adapter);
         void addActionSearch(TextInputEditText editSearch);
-        void loadListBillData(String roomId);
+        void loadListBillData(String roomId,Context context);
     }
 
     public interface listBillFragmentView{
