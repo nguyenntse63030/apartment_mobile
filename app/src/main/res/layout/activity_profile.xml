@@ -59,7 +59,9 @@
             <androidx.percentlayout.widget.PercentRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="75dp">
+                android:layout_marginTop="75dp"
+                app:layout_widthPercent="90%"
+                android:layout_centerHorizontal="true">
                 <TextView
 
                     android:id="@+id/lbFullName"

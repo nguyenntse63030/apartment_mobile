@@ -35,7 +35,7 @@
         android:layout_below="@+id/headerLayout"
         android:elevation="2dp">
         <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/imgAvatar"
+            android:id="@+id/imgAvatarUpdate"
             android:layout_marginTop="50dp"
             android:layout_width="150dp"
             android:layout_height="150dp"
@@ -55,170 +55,80 @@
         android:layout_marginTop="125dp"
         android:background="@color/colorPrimaryDark"
         android:elevation="1dp"
+
         >
         <androidx.percentlayout.widget.PercentRelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="75dp">
-            <TextView
+            android:layout_marginTop="75dp"
+            android:layout_centerHorizontal="true"
+            app:layout_widthPercent="90%">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_widthPercent="100%"
+                android:layout_margin="4dp"
+                android:hint="Name"
+                android:background="@drawable/border_edittext">
 
-                android:id="@+id/lbFullName"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:inputType="text"
+                    android:layout_marginBottom="12dp"
+                    android:paddingStart="5dp"
+                    android:drawableStart="@drawable/ic_person"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutGender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Full name"
-                app:layout_widthPercent="30%"
-                android:textColor="@color/white"
-                android:layout_margin="5dp"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                />
-            <TextView
-                android:id="@+id/txtFullName"
+                app:layout_widthPercent="100%"
+                android:layout_below="@+id/layoutName"
+                android:layout_margin="4dp"
+                android:hint="Gendar"
+                android:background="@drawable/border_edittext">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:inputType="text"
+                    android:layout_marginBottom="12dp"
+                    android:paddingStart="5dp"
+                    android:drawableStart="@drawable/ic_male"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutBirth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dang Huu Le"
-                android:textColor="@color/white"
-                android:layout_toRightOf="@id/lbFullName"
-                android:textSize="20dp"
-                android:layout_margin="5dp"
-                android:textStyle="bold"
-                />
-            <View
-                android:id="@+id/viewFullName"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_centerHorizontal="true"
-                app:layout_widthPercent="95%"
-                android:layout_below="@id/txtFullName"
-                android:background="@color/white"/>
-            <TextView
-                android:id="@+id/lbGendar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Gendar"
-                app:layout_widthPercent="30%"
-                android:textColor="@color/white"
-                android:layout_margin="5dp"
-                android:layout_below="@id/viewFullName"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                />
-            <TextView
-                android:id="@+id/txtGendar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Male"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:layout_toRightOf="@+id/lbGendar"
-                android:layout_margin="5dp"
-                android:textStyle="bold"
-                android:layout_below="@+id/viewFullName"
-                />
-            <View
-                android:id="@+id/viewGendar"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_centerHorizontal="true"
-                app:layout_widthPercent="95%"
-                android:layout_below="@id/txtGendar"
-                android:background="@color/white"/>
-            <TextView
-                android:id="@+id/lbPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Phone"
-                app:layout_widthPercent="30%"
-                android:layout_margin="5dp"
-                android:textColor="@color/white"
-                android:layout_below="@id/viewGendar"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                />
-            <TextView
-                android:id="@+id/txtPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="0965923447"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_below="@+id/viewGendar"
-                android:layout_toRightOf="@id/lbFullName"
-                />
-            <View
-                android:id="@+id/viewPhone"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_centerHorizontal="true"
-                app:layout_widthPercent="95%"
-                android:layout_below="@id/txtPhone"
-                android:background="@color/white"/>
-            <TextView
-                android:id="@+id/lbEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:layout_margin="5dp"
-                app:layout_widthPercent="30%"
-                android:textColor="@color/white"
-                android:layout_below="@id/viewPhone"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                />
-            <TextView
-                android:id="@+id/txtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ledocon@gmail.com"
-                android:layout_margin="5dp"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:layout_toRightOf="@id/lbFullName"
-                android:textStyle="bold"
-                android:layout_below="@+id/viewPhone"
-                />
-            <View
-                android:id="@+id/viewEmail"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_centerHorizontal="true"
-                app:layout_widthPercent="95%"
-                android:layout_below="@id/txtEmail"
-                android:background="@color/white"/>
-            <TextView
-                android:id="@+id/lbBirth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Birth Day"
-                app:layout_widthPercent="30%"
-                android:textColor="@color/white"
-                android:layout_margin="5dp"
-                android:layout_below="@id/viewEmail"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                />
-            <TextView
-                android:id="@+id/txtBirthDay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="11/07/1998"
-                android:textColor="@color/white"
-                android:layout_margin="5dp"
-                android:textSize="20dp"
-                android:layout_toRightOf="@id/lbFullName"
-                android:textStyle="bold"
-                android:layout_below="@+id/viewEmail"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_centerHorizontal="true"
-                app:layout_widthPercent="95%"
-                android:layout_below="@id/lbBirth"
-                android:background="@color/white"/>
+                app:layout_widthPercent="100%"
+                android:layout_below="@+id/layoutGender"
+                android:layout_margin="4dp"
+                android:hint="BirthDay"
+                android:background="@drawable/border_edittext">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editBirthDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:inputType="text"
+                    android:layout_marginBottom="12dp"
+                    android:paddingStart="5dp"
+                    android:drawableStart="@drawable/ic_birthday"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Button
+                android:id="@+id/btnUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Update"

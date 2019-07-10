@@ -65,20 +65,17 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
             boolean checkValid = checkValid(editPhone, editPassword, phone, password);
             if(checkValid){
                 userApi = GlobalValue.retrofit.create(UserApi.class);
-//            JSONObject paramObj = new JSONObject();
-//            paramObj.put("phone", phone);
-//            paramObj.put("password", password);
-            Map<String,String> data=new HashMap<>();
-            data.put("phone", phone);
-            data.put("password", password);
-            Call<JsonElement> call =userApi.verify(data);
-            call.enqueue(new Callback<JsonElement>() {
+                Map<String,String> data=new HashMap<>();
+                data.put("phone", phone);
+                data.put("password", password);
+                Call<JsonElement> call =userApi.verify(data);
+                call.enqueue(new Callback<JsonElement>() {
                 @Override
                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                    JsonElement responseData = response.body();
-                    JsonParser parser = new JsonParser();
-                    JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
-                    if (responseObj.has("user")) {
+                    if (response.code()==200){
+                        JsonElement responseData = response.body();
+                        JsonParser parser = new JsonParser();
+                        JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
                         JsonObject user = responseObj.get("user").getAsJsonObject();
                         String token = responseObj.get("token").getAsString();
 
@@ -180,10 +177,10 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
             call.enqueue(new Callback<JsonElement>() {
                 @Override
                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                    JsonElement responseData = response.body();
-                    JsonParser parser = new JsonParser();
-                    JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
-                    if (responseObj.get("status").getAsString().equalsIgnoreCase("200")) {
+                    if (response.code()==200){
+                        JsonElement responseData = response.body();
+                        JsonParser parser = new JsonParser();
+                        JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
                         JsonObject user = responseObj.get("user").getAsJsonObject();
                         String token = responseObj.get("token").getAsString();
 
@@ -196,6 +193,7 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
                         //add profile user
                         editor.putString("name", userObj.getName());
                         editor.putString("id", userObj.getId());
+                        editor.putInt("account", userObj.getAccount());
                         editor.putString("gender", userObj.getGender());
                         editor.putString("mail", userObj.getEmail());
                         editor.putString("phone", userObj.getPhone());

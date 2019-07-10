@@ -8,8 +8,10 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface UserApi {
@@ -27,4 +29,11 @@ public interface UserApi {
     })
     @POST("auth/verifyGoogle")
     Call<JsonElement> verifyGoogle(@Body Map<String,String> data);
+    @Headers({
+            "Content-Type:application/json"
+    })
+    @PUT("user/{userId}")
+    Call<JsonElement> updateUser(@Header("mobile-access-token") String token,@Path("userId")String userId,@Body Map<String,String> data);
+    @PUT("user/deposit")
+    Call<JsonElement> depositAccount(@Header("mobile-access-token") String token,@Body Map<String,String> data);
 }

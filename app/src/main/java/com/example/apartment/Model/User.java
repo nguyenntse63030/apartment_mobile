@@ -10,8 +10,9 @@ public class User implements Serializable {
     @Expose
     private String id;
     private String code, name, gender, role, phone, email, password, address, dateOfBirth,createdTime,photoURL;
+    private int account;
 
-    public User(String id, String code, String name, String gender, String role, String phone, String email, String password, String address, String dateOfBirth, String createdTime, String photoURL) {
+    public User(String id, String code, String name, String gender, String role, String phone, String email, String password, String address, String dateOfBirth, String createdTime, String photoURL, int account) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -24,6 +25,15 @@ public class User implements Serializable {
         this.dateOfBirth = dateOfBirth;
         this.createdTime = createdTime;
         this.photoURL = photoURL;
+        this.account = account;
+    }
+
+    public int getAccount() {
+        return account;
+    }
+
+    public void setAccount(int account) {
+        this.account = account;
     }
 
     public String getCreatedTime() {
