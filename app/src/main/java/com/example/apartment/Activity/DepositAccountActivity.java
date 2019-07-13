@@ -1,7 +1,9 @@
 package com.example.apartment.Activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +14,7 @@ import com.example.apartment.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.makeramen.roundedimageview.RoundedImageView;
 
-public class DepositAccountActivity extends AppCompatActivity {
+public class DepositAccountActivity extends AppCompatActivity implements DepositAccountActivityContract.DepositAccountActivityView {
     private TextInputEditText editAccount,editCash;
     private RoundedImageView imgAvatar;
     private DepositAccountActivityContract.DepositAccountActivityPresenter presenter;
@@ -43,5 +45,22 @@ public class DepositAccountActivity extends AppCompatActivity {
 
     public void clickToBack(View view) {
         finish();
+    }
+
+    @Override
+    public void showDialog(String message) {
+        AlertDialog.Builder mess = new AlertDialog.Builder(this);
+        mess.setTitle("Notification");
+
+        mess.setMessage(message)
+                .setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog showMess = mess.create();
+        showMess.show();
     }
 }

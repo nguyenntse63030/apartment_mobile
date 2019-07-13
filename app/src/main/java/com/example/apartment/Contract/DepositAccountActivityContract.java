@@ -10,4 +10,7 @@ public class DepositAccountActivityContract {
         void fillData(Context context, RoundedImageView imgAvatar, TextInputEditText editAccount,TextInputEditText editCash);
         void depositAccount(Context context, RoundedImageView imgAvatar, TextInputEditText editAccount,TextInputEditText editCash);
     }
+    public interface  DepositAccountActivityView{
+        void showDialog(String message);
+    }
 }

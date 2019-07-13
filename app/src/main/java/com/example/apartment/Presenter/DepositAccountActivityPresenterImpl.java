@@ -31,10 +31,10 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class DepositAccountActivityPresenterImpl implements DepositAccountActivityContract.DepositAccountActivityPresenter {
     private UserApi userApi;
-    private DepositAccountActivity accountActivity;
+    private DepositAccountActivityContract.DepositAccountActivityView view;
 
-    public DepositAccountActivityPresenterImpl(DepositAccountActivity accountActivity) {
-        this.accountActivity = accountActivity;
+    public DepositAccountActivityPresenterImpl(DepositAccountActivityContract.DepositAccountActivityView view) {
+        this.view = view;
     }
 
     @Override
@@ -79,19 +79,7 @@ public class DepositAccountActivityPresenterImpl implements DepositAccountActivi
 
                     editor.apply();
 
-                    AlertDialog.Builder mess = new AlertDialog.Builder(accountActivity);
-                    mess.setTitle("Notification");
-
-                    mess.setMessage(message)
-                            .setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-
-                    AlertDialog showMess = mess.create();
-                    showMess.show();
+                    view.showDialog(message);
 
 
                 } else {
