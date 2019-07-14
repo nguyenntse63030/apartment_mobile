@@ -13,5 +13,9 @@ public class LoginActivityContract {
     }
     public interface  LoginActivityView{
         void changePage();
+        void loginFailed();
+        void closeDialog();
+        void showDialog();
+        void showMessErr(String errorMess);
     }
 }
