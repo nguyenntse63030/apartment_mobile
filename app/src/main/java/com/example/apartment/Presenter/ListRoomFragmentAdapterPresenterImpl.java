@@ -60,7 +60,7 @@ public class ListRoomFragmentAdapterPresenterImpl implements ListRoomFragmentAda
         holder.getTxtDistrict().setText("District: "+roomList.get(position).getApartment().getAddress());
         holder.getTxtRoomID().setText("Room ID: "+roomList.get(position).getCode());
         holder.getTxtSignDate().setText("Sign date: "+roomList.get(position).getSignDate());
-        holder.getTxtUnpayBillNumber().setText("Unpay bill : "+roomList.get(position).getNumberUnpayBill());
+        holder.getTxtUnpayBillNumber().setText("Unpay bill : "+roomList.get(position).getUnpayBill());
     }
 
     @Override

@@ -18,7 +18,7 @@ public class RoomDetailActivityPresenterImpl implements RoomDetailActivityContra
         txtRoomID.setText("Code: "+room.getCode());
         txtRoomNumber.setText("Number: "+room.getRoomNumber());
         txtDistrict.setText("District: "+room.getUser().getAddress());
-        txtUnpayBillNumber.setText("Unpay bill: "+room.getNumberUnpayBill());
+        txtUnpayBillNumber.setText("Unpay bill: "+room.getUnpayBill());
         txtTotalBillNumber.setText("Total bill: "+room.getTotalBill());
         txtSignDate.setText("Sign Date: "+room.getSignDate());
         txtExpireDate.setText("Expired Date: "+room.getExpiredDate());

@@ -18,7 +18,7 @@ public class GlobalValue {
     public static FirebaseAuth mAuth;
 
     public static final Retrofit retrofit=new Retrofit.Builder()
-//             .baseUrl("http://192.168.0.108:1998/api/v1/")
+//             .baseUrl("http://172.20.10.2:1998/api/v1/")
             .baseUrl("https://apartmentswd391.herokuapp.com/api/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();

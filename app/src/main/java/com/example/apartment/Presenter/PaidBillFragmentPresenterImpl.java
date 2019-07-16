@@ -77,7 +77,7 @@ public class PaidBillFragmentPresenterImpl implements PaidBillFragmentContract.p
                         for (int i = 0;i < bills.size();i++){
                             JsonObject bill = bills.get(i).getAsJsonObject();
                             JsonObject user = bill.get("user").getAsJsonObject();
-                            JsonObject manager = bill.get("manager").getAsJsonObject();
+                            JsonObject manager = bill.get("creator").getAsJsonObject();
                             JsonObject apartment = bill.get("apartment").getAsJsonObject();
                             JsonObject room = bill.get("room").getAsJsonObject();
 
@@ -87,7 +87,7 @@ public class PaidBillFragmentPresenterImpl implements PaidBillFragmentContract.p
                             User managerObj=gsonSP.fromJson(manager.toString(),User.class);
                             Apartment apartmentObj=gsonSP.fromJson(apartment.toString(), Apartment.class);
 //                        Room roomObj=gsonSP.fromJson(room,Room.class);
-                            Room roomObj=new Room(room.get("_id").getAsString(),room.get("roomNumber").getAsString(),room.get("code").getAsString(),0,0,room.get("signDate").getAsString(),room.get("expiredDate").getAsString());
+                            Room roomObj=new Room(room.get("_id").getAsString(),room.get("roomNumber").getAsString(),room.get("code").getAsString(),"0","0",room.get("signDate").getAsString(),room.get("expiredDate").getAsString());
                             bill.remove("room");
                             Bills billObj=gsonSP.fromJson(bill.toString(),Bills.class);
 

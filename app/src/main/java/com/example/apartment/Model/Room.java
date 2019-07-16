@@ -13,8 +13,20 @@ public class Room implements Serializable {
     private String code;
     private User user;
     private Apartment apartment;
-    private int numberUnpayBill, totalBill;
+    private String unpayBill, totalBill;
     private String signDate, expiredDate;
+
+    public String getUnpayBill() {
+        return unpayBill != null ? unpayBill : "0";
+    }
+
+    public void setUnpayBill(String unpayBill) {
+        this.unpayBill = unpayBill;
+    }
+
+    public void setTotalBill(String totalBill) {
+        this.totalBill = totalBill;
+    }
 
     public void setSignDate(String signDate) {
         this.signDate = signDate;
@@ -52,12 +64,8 @@ public class Room implements Serializable {
         return code;
     }
 
-    public int getNumberUnpayBill() {
-        return numberUnpayBill;
-    }
-
-    public int getTotalBill() {
-        return totalBill;
+    public String getTotalBill() {
+        return totalBill!=null?totalBill : "0";
     }
 
     public String getSignDate() {
@@ -68,11 +76,11 @@ public class Room implements Serializable {
         return expiredDate;
     }
 
-    public Room(String id, String roomNumber, String code, int numberUnpayBill, int totalBill, String signDate, String expiredDate) {
+    public Room(String id, String roomNumber, String code, String unpayBill, String totalBill, String signDate, String expiredDate) {
         this.id = id;
         this.roomNumber = roomNumber;
         this.code = code;
-        this.numberUnpayBill = numberUnpayBill;
+        this.unpayBill = unpayBill;
         this.totalBill = totalBill;
         this.signDate = signDate;
         this.expiredDate = expiredDate;

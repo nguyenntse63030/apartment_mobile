@@ -82,10 +82,29 @@
                 android:layout_below="@id/btnDeposit"
                 android:background="@color/white"/>
             <Button
-                android:id="@+id/btnLogout"
+                android:id="@+id/btnMap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btnDeposit"
+                android:textSize="17dp"
+                android:background="@null"
+                android:layout_centerHorizontal="true"
+                app:layout_widthPercent="80%"
+                android:textColor="@color/white"
+                android:drawableStart="@drawable/ic_map_white"
+                android:text="Search around"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                app:layout_widthPercent="80%"
+                android:layout_below="@id/btnDeposit"
+                android:background="@color/white"/>
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnMap"
                 android:layout_centerHorizontal="true"
                 app:layout_widthPercent="80%"
                 android:textSize="17dp"

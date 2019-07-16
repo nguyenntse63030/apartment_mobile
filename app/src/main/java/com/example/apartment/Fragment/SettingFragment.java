@@ -14,7 +14,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.apartment.Activity.DepositAccountActivity;
 import com.example.apartment.Activity.LoginActivity;
+import com.example.apartment.Activity.MapsActivity;
 import com.example.apartment.Activity.ProfileActivity;
+import com.example.apartment.Contract.MapActivityContract;
 import com.example.apartment.Global.GlobalValue;
 import com.example.apartment.R;
 
@@ -22,7 +24,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 
 public class SettingFragment extends Fragment {
-    Button btnProfile,btnDeposit,btnLogout;
+    private Button btnProfile,btnDeposit,btnLogout,btnMap;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,8 @@ public class SettingFragment extends Fragment {
         View view = inflater.inflate(R.layout.setting_fragment, container, false);
         btnProfile = view.findViewById(R.id.btnProfile);
         btnDeposit = view.findViewById(R.id.btnDeposit);
+        btnMap = view.findViewById(R.id.btnMap);
+
         btnLogout = view.findViewById(R.id.btnLogout);
         btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +50,13 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), DepositAccountActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MapsActivity.class);
                 startActivity(intent);
             }
         });
