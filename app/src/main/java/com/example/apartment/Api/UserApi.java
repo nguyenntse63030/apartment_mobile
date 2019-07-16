@@ -21,7 +21,7 @@ public interface UserApi {
     @Headers({
             "Content-Type:application/json"
     })
-    @POST("auth/sign_in")
+    @POST("auth/sign_in_mobile")
     Call<JsonElement> verify(@Body Map<String,String> data);
 //    https://apartmentswd391.herokuapp.com/api/v1/auth/google
     @Headers({
