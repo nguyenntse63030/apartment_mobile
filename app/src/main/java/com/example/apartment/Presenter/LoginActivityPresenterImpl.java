@@ -57,13 +57,14 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
     }
 
     @Override
-    public void login(TextInputEditText editPhone, TextInputEditText editPassword, final Context context) {
+    public void login(final TextInputEditText editPhone, final TextInputEditText editPassword, final Context context) {
         try {
             String phone = editPhone.getText().toString();
             String password = editPassword.getText().toString();
 
             boolean checkValid = checkValid(editPhone, editPassword, phone, password);
             if(checkValid){
+                view.showDialog();
                 userApi = GlobalValue.retrofit.create(UserApi.class);
                 Map<String,String> data=new HashMap<>();
                 data.put("phone", phone);
@@ -98,11 +99,27 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
                         editor.putString("photoURL", userObj.getPhotoURL());
 
                         editor.apply();
+
+                        view.closeDialog();
                         view.changePage();
 
 
                     } else {
-                        System.out.println(response);
+
+                        view.loginFailed();
+                        view.closeDialog();
+
+                        try {
+                            JSONObject errorBody = new JSONObject(response.errorBody().string());
+                            String errorMess = errorBody.getString("errorMessage");
+                            view.showMessErr(errorMess);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        editPassword.setText("");
+                       // editPhone.setText("");
+
                     }
                 }
                     @Override
@@ -110,6 +127,8 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
                         System.out.println(t.getMessage());
                     }
                 });
+            }else {
+                view.loginFailed();
             }
 
         }catch (Exception e){
