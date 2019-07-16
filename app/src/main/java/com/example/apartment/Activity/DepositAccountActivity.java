@@ -34,6 +34,7 @@ public class DepositAccountActivity extends AppCompatActivity implements Deposit
     @Override
     protected void onStart() {
         super.onStart();
+        editAccount.setEnabled(false);
         presenter.fillData(getApplicationContext(),imgAvatar,editAccount,editCash);
         btnDeposit.setOnClickListener(new View.OnClickListener() {
             @Override

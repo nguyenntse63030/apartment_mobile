@@ -68,13 +68,14 @@ public class UnpayBillFragmentPresenterImpl implements UnpayBillFragmentContract
             }
         });
     }
-    private void filter(String text){
+
+    private void filter(String text) {
         List<Bills> filteredList = new ArrayList<>();
-        for (Bills bill:listBills ) {
+        for (Bills bill : listBills) {
             if (bill.getType().toLowerCase().contains(text.toLowerCase().trim())
-                    ||bill.getCreatedTime().toLowerCase().contains(text.toLowerCase().trim())
-                    ||bill.getExpiredTime().toLowerCase().contains(text.toLowerCase().trim())
-                    ||bill.getRoom().getRoomNumber().toLowerCase().contains(text.toLowerCase().trim())){
+                    || bill.getCreatedTime().toLowerCase().contains(text.toLowerCase().trim())
+                    || bill.getExpiredTime().toLowerCase().contains(text.toLowerCase().trim())
+                    || bill.getRoom().getRoomNumber().toLowerCase().contains(text.toLowerCase().trim())) {
                 filteredList.add(bill);
             }
         }
@@ -83,37 +84,38 @@ public class UnpayBillFragmentPresenterImpl implements UnpayBillFragmentContract
     }
 
     @Override
-    public void inputListUnpayBillData(Context context){
+    public void inputListUnpayBillData(Context context) {
         billApi = GlobalValue.retrofit.create(BillApi.class);
-        SharedPreferences sharedPreferences = context.getSharedPreferences("User",Context.MODE_PRIVATE);
-        String userId=sharedPreferences.getString("id","");
-        getListBill(userId,context);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+        String userId = sharedPreferences.getString("id", "");
+        getListBill(userId, context);
     }
 
-    public void createAdapter(){
+    public void createAdapter() {
         unpayBillFragmentAdapterPresenter = new UnpayBillFragmentAdapterPresenterImpl(listBills, (Unpay_Bill_Listener) view);
         view.setAdapter(unpayBillFragmentAdapterPresenter);
     }
-    private void getListBill(String userId, final Context context){
-        if(listBills != null){
-            if(!listBills.isEmpty()){
+
+    private void getListBill(String userId, final Context context) {
+        if (listBills != null) {
+            if (!listBills.isEmpty()) {
                 listBills.clear();
             }
         }
         try {
-            SharedPreferences sharedPreferences = context.getSharedPreferences("User",Context.MODE_PRIVATE);
-            String token = sharedPreferences.getString("token","");
-            Call<JsonElement> call =billApi.getUnpaidBill(token,userId);
+            SharedPreferences sharedPreferences = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+            String token = sharedPreferences.getString("token", "");
+            Call<JsonElement> call = billApi.getUnpaidBill(token, userId);
             call.enqueue(new Callback<JsonElement>() {
                 @Override
                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                    if (response.code()==200){
+                    if (response.code() == 200) {
                         JsonElement responseData = response.body();
-                        JsonParser parser= new JsonParser();
+                        JsonParser parser = new JsonParser();
                         JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
                         JsonArray bills = responseObj.get("listBill").getAsJsonArray();
 
-                        for (int i = 0;i < bills.size();i++){
+                        for (int i = 0; i < bills.size(); i++) {
                             JsonObject bill = bills.get(i).getAsJsonObject();
                             JsonObject user = bill.get("user").getAsJsonObject();
                             JsonObject manager = bill.get("creator").getAsJsonObject();
@@ -122,14 +124,14 @@ public class UnpayBillFragmentPresenterImpl implements UnpayBillFragmentContract
 
                             Gson gsonSP = new Gson();
 
-                            User userObj=gsonSP.fromJson(user.toString(),User.class);
-                            User managerObj=gsonSP.fromJson(manager.toString(),User.class);
-                            Apartment apartmentObj=gsonSP.fromJson(apartment.toString(), Apartment.class);
+                            User userObj = gsonSP.fromJson(user.toString(), User.class);
+                            User managerObj = gsonSP.fromJson(manager.toString(), User.class);
+                            Apartment apartmentObj = gsonSP.fromJson(apartment.toString(), Apartment.class);
 //                        Room roomObj=gsonSP.fromJson(room.toString(),Room.class);
 
-                            Room roomObj=new Room(room.get("_id").getAsString(),room.get("roomNumber").getAsString(),room.get("code").getAsString(),"0","0",room.get("signDate").getAsString(),room.get("expiredDate").getAsString());
+                            Room roomObj = new Room(room.get("_id").getAsString(), room.get("roomNumber").getAsString(), room.get("code").getAsString(), room.get("signDate").getAsString(), room.get("expiredDate").getAsString());
                             bill.remove("room");
-                            Bills billObj=gsonSP.fromJson(bill.toString(),Bills.class);
+                            Bills billObj = gsonSP.fromJson(bill.toString(), Bills.class);
 
 
                             billObj.setUser(userObj);
@@ -143,9 +145,9 @@ public class UnpayBillFragmentPresenterImpl implements UnpayBillFragmentContract
                             listBills.add(billObj);
                         }
                         createAdapter();
-                    }else{
+                    } else {
                         try {
-                            JSONObject errorBody=new JSONObject(response.errorBody().string());
+                            JSONObject errorBody = new JSONObject(response.errorBody().string());
                             Toast.makeText(context, errorBody.getString("errorMessage"), Toast.LENGTH_SHORT).show();
 
                         } catch (Exception e) {
@@ -154,12 +156,13 @@ public class UnpayBillFragmentPresenterImpl implements UnpayBillFragmentContract
                     }
 
                 }
+
                 @Override
                 public void onFailure(Call<JsonElement> call, Throwable t) {
                     System.out.println(t.getMessage());
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

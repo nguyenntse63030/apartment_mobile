@@ -65,7 +65,7 @@ public class Room implements Serializable {
     }
 
     public String getTotalBill() {
-        return totalBill!=null?totalBill : "0";
+        return totalBill != null ? totalBill : "0";
     }
 
     public String getSignDate() {
@@ -82,6 +82,15 @@ public class Room implements Serializable {
         this.code = code;
         this.unpayBill = unpayBill;
         this.totalBill = totalBill;
+        this.signDate = signDate;
+        this.expiredDate = expiredDate;
+    }
+
+    public Room(String id, String roomNumber, String code, String signDate, String expiredDate) {
+        this.id = id;
+        this.roomNumber = roomNumber;
+        this.code = code;
+
         this.signDate = signDate;
         this.expiredDate = expiredDate;
     }

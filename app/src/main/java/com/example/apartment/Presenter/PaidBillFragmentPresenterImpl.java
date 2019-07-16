@@ -87,7 +87,7 @@ public class PaidBillFragmentPresenterImpl implements PaidBillFragmentContract.p
                             User managerObj=gsonSP.fromJson(manager.toString(),User.class);
                             Apartment apartmentObj=gsonSP.fromJson(apartment.toString(), Apartment.class);
 //                        Room roomObj=gsonSP.fromJson(room,Room.class);
-                            Room roomObj=new Room(room.get("_id").getAsString(),room.get("roomNumber").getAsString(),room.get("code").getAsString(),"0","0",room.get("signDate").getAsString(),room.get("expiredDate").getAsString());
+                            Room roomObj=new Room(room.get("_id").getAsString(),room.get("roomNumber").getAsString(),room.get("code").getAsString(),room.get("signDate").getAsString(),room.get("expiredDate").getAsString());
                             bill.remove("room");
                             Bills billObj=gsonSP.fromJson(bill.toString(),Bills.class);
 

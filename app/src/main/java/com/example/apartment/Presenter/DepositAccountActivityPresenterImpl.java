@@ -48,7 +48,7 @@ public class DepositAccountActivityPresenterImpl implements DepositAccountActivi
     }
 
     @Override
-    public void depositAccount(final Context context, RoundedImageView imgAvatar, final TextInputEditText editAccount, TextInputEditText editCash) {
+    public void depositAccount(final Context context, RoundedImageView imgAvatar, final TextInputEditText editAccount, final TextInputEditText editCash) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("User",Context.MODE_PRIVATE);
 //        SharedPreferences.Editor editor = sharedPreferences.edit();
         final int account = sharedPreferences.getInt("account",0);
@@ -67,16 +67,16 @@ public class DepositAccountActivityPresenterImpl implements DepositAccountActivi
                     JsonParser parser = new JsonParser();
                     JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
                     String message = responseObj.get("message").getAsString();
-//                    String token = responseObj.get("token").getAsString();
+                    int newAccount = responseObj.get("newAccount").getAsInt();
 //
 //                    Gson gsonSP = new Gson();
 //
 //                    User userObj = gsonSP.fromJson(user.toString(), User.class);
                     SharedPreferences.Editor editor = context.getSharedPreferences("User", MODE_PRIVATE).edit();
                     //add profile user
-                    editor.putInt("account", account + money);
-                    editAccount.setText(String.valueOf(account + money));
-
+                    editor.putInt("account", newAccount);
+                    editAccount.setText(String.valueOf(newAccount));
+                    editCash.setText("");
                     editor.apply();
 
                     view.showDialog(message);
