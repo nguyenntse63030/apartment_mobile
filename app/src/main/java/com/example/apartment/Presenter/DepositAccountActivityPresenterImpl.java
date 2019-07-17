@@ -67,11 +67,7 @@ public class DepositAccountActivityPresenterImpl implements DepositAccountActivi
                     JsonParser parser = new JsonParser();
                     JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
                     String message = responseObj.get("message").getAsString();
-//                    String token = responseObj.get("token").getAsString();
-//
-//                    Gson gsonSP = new Gson();
-//
-//                    User userObj = gsonSP.fromJson(user.toString(), User.class);
+
                     SharedPreferences.Editor editor = context.getSharedPreferences("User", MODE_PRIVATE).edit();
                     //add profile user
                     editor.putInt("account", account + money);
@@ -83,7 +79,13 @@ public class DepositAccountActivityPresenterImpl implements DepositAccountActivi
 
 
                 } else {
-                    System.out.println(response);
+                    try {
+                        JSONObject errorBody=new JSONObject(response.errorBody().string());
+                        Toast.makeText(context, errorBody.getString("errorMessage"), Toast.LENGTH_SHORT).show();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
             @Override

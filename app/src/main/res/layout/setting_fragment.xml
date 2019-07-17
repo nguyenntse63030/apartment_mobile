@@ -98,7 +98,7 @@
                 android:layout_height="1dp"
                 android:layout_centerHorizontal="true"
                 app:layout_widthPercent="80%"
-                android:layout_below="@id/btnDeposit"
+                android:layout_below="@id/btnMap"
                 android:background="@color/white"/>
             <Button
                 android:id="@+id/btnLogout"
