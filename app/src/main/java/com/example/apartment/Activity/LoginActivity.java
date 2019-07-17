@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityCon
         btnSignInGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnSignInGoogle.setEnabled(false);
+                //btnSignInGoogle.setEnabled(false);
                 signIn();
             }
         });

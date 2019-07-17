@@ -18,22 +18,26 @@ public interface UserApi {
 
     @GET("user/role/{role}")
     Call<JsonElement> getUsersByRole(@Path("role")String role);
+
     @Headers({
             "Content-Type:application/json"
     })
     @POST("auth/sign_in_mobile")
     Call<JsonElement> verify(@Body Map<String,String> data);
 //    https://apartmentswd391.herokuapp.com/api/v1/auth/google
+
     @Headers({
             "Content-Type:application/json"
     })
     @POST("auth/verifyGoogle")
     Call<JsonElement> verifyGoogle(@Body Map<String,String> data);
+
     @Headers({
             "Content-Type:application/json"
     })
     @PUT("user/{userId}")
     Call<JsonElement> updateUser(@Header("mobile-access-token") String token,@Path("userId")String userId,@Body Map<String,String> data);
+
     @PUT("user/deposit")
     Call<JsonElement> depositAccount(@Header("mobile-access-token") String token,@Body Map<String,String> data);
 }
