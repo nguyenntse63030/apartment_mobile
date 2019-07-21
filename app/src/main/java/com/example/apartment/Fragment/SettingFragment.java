@@ -82,6 +82,7 @@ public class SettingFragment extends Fragment {
                 //Back to login page
                 Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
         return view;
