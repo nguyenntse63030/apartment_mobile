@@ -15,6 +15,7 @@ import com.example.apartment.Fragment.ListRoomFragment;
 import com.example.apartment.Fragment.SettingFragment;
 import com.example.apartment.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class HomeActivity extends AppCompatActivity{
     private BottomNavigationView taskBarItem;
@@ -23,7 +24,8 @@ public class HomeActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        String token = FirebaseInstanceId.getInstance().getToken();
+        System.out.println(token);
         fm = getSupportFragmentManager();
 
         taskBarItem = findViewById(R.id.taskBarItem);
