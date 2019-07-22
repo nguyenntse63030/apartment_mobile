@@ -24,6 +24,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -47,9 +48,6 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
     private int RC_SIGN_IN = 1;
     private String TAG = "LoginActivity";
 
-//    public LoginActivityPresenterImpl(LoginActivityContract.LoginActivityView view) {
-//        this.view = view;
-//    }
 
 
     public LoginActivityPresenterImpl(LoginActivity view) {
@@ -61,7 +59,7 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
         try {
             String phone = editPhone.getText().toString();
             String password = editPassword.getText().toString();
-
+            String tokenFirebase = FirebaseInstanceId.getInstance().getToken();
             boolean checkValid = checkValid(editPhone, editPassword, phone, password);
             if (checkValid) {
                 view.showDialog();
@@ -69,6 +67,7 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
                 Map<String, String> data = new HashMap<>();
                 data.put("phone", phone);
                 data.put("password", password);
+                data.put("androidToken", tokenFirebase);
                 Call<JsonElement> call = userApi.verify(data);
                 call.enqueue(new Callback<JsonElement>() {
                     @Override
@@ -181,19 +180,18 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
     private void updateUI(FirebaseUser user) {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(view);
         if (acct != null) {
-            String personName = acct.getDisplayName();
             String personGivenName = acct.getGivenName();
             String personFamilyName = acct.getFamilyName();
             String personEmail = acct.getEmail();
-            String personId = acct.getId();
+            String tokenFirebase = FirebaseInstanceId.getInstance().getToken();
             Uri personPhoto = acct.getPhotoUrl();
-            Toast.makeText(view, "User name" + personName + "person email:" + personEmail, Toast.LENGTH_SHORT).show();
             userApi = GlobalValue.retrofit.create(UserApi.class);
             Map<String, String> data = new HashMap<>();
             data.put("email", personEmail);
             data.put("personFamilyName", personFamilyName);
             data.put("personGivenName", personGivenName);
             data.put("personPhoto", personPhoto.toString());
+            data.put("androidToken", tokenFirebase);
 
             Call<JsonElement> call = userApi.verifyGoogle(data);
             call.enqueue(new Callback<JsonElement>() {
@@ -230,7 +228,13 @@ public class LoginActivityPresenterImpl implements LoginActivityContract.LoginAc
 
 
                     } else {
-                        System.out.println(response);
+                        try {
+                            JSONObject errorBody=new JSONObject(response.errorBody().string());
+                            Toast.makeText(view, errorBody.getString("errorMessage"), Toast.LENGTH_SHORT).show();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
 
