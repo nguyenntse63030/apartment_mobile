@@ -38,7 +38,7 @@ public class FirebaseMsgService extends FirebaseMessagingService {
                     .setSmallIcon(R.drawable.logo_apartment_xin)
                     .setContentTitle(remoteMessage.getNotification().getTitle())
                     .setContentText(remoteMessage.getNotification().getBody())
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT).build();
+                    .setPriority(NotificationCompat.PRIORITY_MAX).build();
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
             notificationManager.notify(1,notification);
         }

@@ -18,7 +18,7 @@ public class App extends Application {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            int importance = NotificationManager.IMPORTANCE_MAX;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Channel 1", importance);
             channel.setDescription("This is notification channel");
             // Register the channel with the system; you can't change the importance
