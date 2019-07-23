@@ -6,6 +6,8 @@
 
     <color name="white" tools:ignore="MissingDefaultResource">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="blue">#03A9F4</color>
+    <color name="grey">#d3d3d3</color>
     <color name="backGroundTaskbar">#673AB7</color>
     <color name="backGroundBillCardView">#50673AB7</color>
 </resources>
