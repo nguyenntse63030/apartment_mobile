@@ -50,6 +50,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements UpdatePr
     @Override
     public void changePage() {
         Intent intentOnclick= new Intent(UpdateProfileActivity.this, ProfileActivity.class);
+        intentOnclick.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intentOnclick);
         finish();
     }
