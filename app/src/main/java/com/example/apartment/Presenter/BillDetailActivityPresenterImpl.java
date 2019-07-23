@@ -37,7 +37,8 @@ public class BillDetailActivityPresenterImpl implements BillDetailActivityContra
     public void fillData(Intent intent, TextView txtBillCode, TextView txtType, TextView txtRoomCode,
                          TextView txtRoomNumber, TextView txtApartment, TextView txtCreateDate,
                          TextView txtExpireDate, TextView txtOldNumber, TextView txtNewNumber,
-                         TextView txtUsedNumber, TextView txtTotal, TextView txtStatus, Button btnPay, final Context context) {
+                         TextView txtUsedNumber, TextView txtTotal, TextView txtStatus, Button btnPay, final Context context,
+                         TextView lbOldNumber,TextView lbNewNumber,TextView lbUsedNumber) {
         final Bills bill = (Bills) intent.getSerializableExtra("bill");
         txtBillCode.setText(bill.getCode());
         txtType.setText(bill.getType());
@@ -46,10 +47,22 @@ public class BillDetailActivityPresenterImpl implements BillDetailActivityContra
         txtApartment.setText(bill.getApartment().getName());
         txtCreateDate.setText(bill.getCreatedTime());
         txtExpireDate.setText(bill.getExpiredTime());
-        txtOldNumber.setText(String.valueOf(bill.getOldNumber()));
-        txtNewNumber.setText(String.valueOf(bill.getNewNumber()));
-        txtUsedNumber.setText(String.valueOf(bill.getUsedNumber()));
-        txtTotal.setText(String.valueOf(bill.getTotal()));
+        if (bill.getType().equalsIgnoreCase("Service")){
+            txtOldNumber.setVisibility(View.INVISIBLE);
+            txtNewNumber.setVisibility(View.INVISIBLE);
+            txtUsedNumber.setVisibility(View.INVISIBLE);
+            lbOldNumber.setVisibility(View.INVISIBLE);
+            lbNewNumber.setVisibility(View.INVISIBLE);
+            lbUsedNumber.setVisibility(View.INVISIBLE);
+        }else{
+            txtOldNumber.setText(String.valueOf(bill.getOldNumber()));
+            txtNewNumber.setText(String.valueOf(bill.getNewNumber()));
+            txtUsedNumber.setText(String.valueOf(bill.getUsedNumber()));
+        }
+
+//        String.valueOf(bill.getTotal())
+        txtTotal.setText(String.format("%,d",bill.getTotal())+ " đ");
+
         txtStatus.setText(bill.getStatus());
         if (bill.getStatus().equalsIgnoreCase("PAID")){
             btnPay.setVisibility(View.INVISIBLE);

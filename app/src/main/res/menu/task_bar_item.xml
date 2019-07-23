@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_news"/>
     <item
         android:id="@+id/ic_unpay_bill"
-        android:title="Unpay Bills"
+        android:title="Bill"
         android:icon="@drawable/ic_bill"/>
     <item
         android:id="@+id/ic_room"

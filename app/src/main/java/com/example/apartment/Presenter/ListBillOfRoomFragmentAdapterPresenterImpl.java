@@ -30,7 +30,7 @@ public class ListBillOfRoomFragmentAdapterPresenterImpl implements ListBillOfRoo
         holder.getTxtBillCode().setText("Code: " + listBill.get(position).getCode().substring(0,15));
         holder.getTxtBillType().setText("Type: " + listBill.get(position).getType());
         holder.getTxtDateExpired().setText("Date Expired: " + listBill.get(position).getExpiredTime());
-        holder.getTxtBillTotal().setText("Total: " + listBill.get(position).getTotal() + " đ");
+        holder.getTxtBillTotal().setText("Total: " + String.format("%,d",listBill.get(position).getTotal()) +  " đ");
         holder.getBoderCardView().setBackgroundResource(R.drawable.border_paidbill_cardview);
     }
 

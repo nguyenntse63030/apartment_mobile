@@ -13,7 +13,9 @@ public class Room implements Serializable {
     private String code;
     private User user;
     private Apartment apartment;
-    private String unpayBill, totalBill;
+    @SerializedName("unpaidBill")
+    private String unpayBill;
+    private String totalBill;
     private String signDate, expiredDate;
 
     public String getUnpayBill() {

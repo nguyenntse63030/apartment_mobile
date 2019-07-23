@@ -25,7 +25,7 @@ public class PaidBillFragmentAdapterPresenterImpl implements PaidBillFragmentAda
         holder.getTxtBillCode().setText("Code: " + listPaidBill.get(position).getCode().substring(0,15));
         holder.getTxtBillType().setText("Type: " + listPaidBill.get(position).getType());
         holder.getTxtDateExpired().setText("Date Expired: " + listPaidBill.get(position).getExpiredTime());
-        holder.getTxtBillTotal().setText("Total: " + listPaidBill.get(position).getTotal() + " đ");
+        holder.getTxtBillTotal().setText("Total: " + String.format("%,d",listPaidBill.get(position).getTotal()) +  " đ");
         holder.getBoderCardView().setBackgroundResource(R.drawable.border_paidbill_cardview);
     }
 

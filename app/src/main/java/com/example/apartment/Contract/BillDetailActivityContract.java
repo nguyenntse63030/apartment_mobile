@@ -10,7 +10,7 @@ public class BillDetailActivityContract {
         void fillData(Intent intent, TextView txtBillCode, TextView txtType,
                       TextView txtRoomCode, TextView txtRoomNumber, TextView txtApartment,
                       TextView txtCreateDate, TextView txtExpireDate, TextView txtOldNumber, TextView txtNewNumber
-                , TextView txtUsedNumber, TextView txtTotal, TextView txtStatus, Button btnPay,Context context);
+                , TextView txtUsedNumber, TextView txtTotal, TextView txtStatus, Button btnPay,Context context,TextView lbOldNumber,TextView lbNewNumber,TextView lbUsedNumber);
         void payBill(Intent intent,Button btnPay,Context context, TextView txtStatus);
     }
     public interface  BillDetailActivityView{
