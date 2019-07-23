@@ -39,9 +39,9 @@ public class DepositAccountActivityPresenterImpl implements DepositAccountActivi
 
     @Override
     public void fillData(Context context, RoundedImageView imgAvatar, TextInputEditText editAccount, TextInputEditText editCash) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("User",Context.MODE_PRIVATE);
-        String urlPhoto = sharedPreferences.getString("photoURL","");
-        int account = sharedPreferences.getInt("account",0);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+        String urlPhoto = sharedPreferences.getString("photoURL", "");
+        int account = sharedPreferences.getInt("account", 0);
 
         Glide.with(context).asBitmap().load(urlPhoto).into(imgAvatar);
         editAccount.setText(String.valueOf(account));
@@ -49,54 +49,61 @@ public class DepositAccountActivityPresenterImpl implements DepositAccountActivi
 
     @Override
     public void depositAccount(final Context context, RoundedImageView imgAvatar, final TextInputEditText editAccount, final TextInputEditText editCash) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("User",Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("User", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor editor = sharedPreferences.edit();
-        final int account = sharedPreferences.getInt("account",0);
-        final int money = Integer.parseInt(editCash.getText().toString());
-        final String token = sharedPreferences.getString("token","");
+        final int account = sharedPreferences.getInt("account", 0);
+        String checkEditCash = editCash.getText().toString();
+        if (!checkEditCash.isEmpty()) {
+            final int money = Integer.parseInt(editCash.getText().toString());
+            final String token = sharedPreferences.getString("token", "");
 
-        userApi = GlobalValue.retrofit.create(UserApi.class);
-        Map<String,String> data=new HashMap<>();
-        data.put("money", String.valueOf(money));
-        Call<JsonElement> call =userApi.depositAccount(token,data);
-        call.enqueue(new Callback<JsonElement>() {
-            @Override
-            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                if (response.code()==200){
-                    JsonElement responseData = response.body();
-                    JsonParser parser = new JsonParser();
-                    JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
-                    String message = responseObj.get("message").getAsString();
-                    int newAccount = responseObj.get("newAccount").getAsInt();
+            userApi = GlobalValue.retrofit.create(UserApi.class);
+            Map<String, String> data = new HashMap<>();
+            data.put("money", String.valueOf(money));
+            Call<JsonElement> call = userApi.depositAccount(token, data);
+            call.enqueue(new Callback<JsonElement>() {
+                @Override
+                public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                    if (response.code() == 200) {
+                        JsonElement responseData = response.body();
+                        JsonParser parser = new JsonParser();
+                        JsonObject responseObj = parser.parse(responseData.toString()).getAsJsonObject();
+                        String message = responseObj.get("message").getAsString();
+                        int newAccount = responseObj.get("newAccount").getAsInt();
 //
 //                    Gson gsonSP = new Gson();
 //
 //                    User userObj = gsonSP.fromJson(user.toString(), User.class);
-                    SharedPreferences.Editor editor = context.getSharedPreferences("User", MODE_PRIVATE).edit();
-                    //add profile user
-                    editor.putInt("account", newAccount);
-                    editAccount.setText(String.valueOf(newAccount));
-                    editCash.setText("");
-                    editor.apply();
+                        SharedPreferences.Editor editor = context.getSharedPreferences("User", MODE_PRIVATE).edit();
+                        //add profile user
+                        editor.putInt("account", newAccount);
+                        editAccount.setText(String.valueOf(newAccount));
+                        editCash.setText("");
+                        editor.apply();
 
-                    view.showDialog(message);
+                        view.showDialog(message);
 
 
-                } else {
-                    try {
-                        JSONObject errorBody=new JSONObject(response.errorBody().string());
-                        Toast.makeText(context, errorBody.getString("errorMessage"), Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+                            JSONObject errorBody = new JSONObject(response.errorBody().string());
+                            Toast.makeText(context, errorBody.getString("errorMessage"), Toast.LENGTH_SHORT).show();
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
-            @Override
-            public void onFailure(Call<JsonElement> call, Throwable t) {
-                System.out.println(t.getMessage());
-            }
-        });
+
+                @Override
+                public void onFailure(Call<JsonElement> call, Throwable t) {
+                    System.out.println(t.getMessage());
+                }
+            });
+        }else {
+            Toast.makeText(context, "Please input money before deposit", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 }
