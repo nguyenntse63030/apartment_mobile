@@ -3,6 +3,7 @@ package com.example.apartment.Activity;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.apartment.Contract.MapActivityContract;
 import com.example.apartment.Presenter.MapActivityPresenterImpl;
@@ -44,5 +45,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        LatLng sydney = new LatLng(-34, 151);
 //        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    public void clickToBack(View view) {
+        finish();
     }
 }
