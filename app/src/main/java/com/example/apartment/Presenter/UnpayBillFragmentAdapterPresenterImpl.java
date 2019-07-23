@@ -24,7 +24,7 @@ public class UnpayBillFragmentAdapterPresenterImpl implements UnpayBillFragmentA
         holder.getTxtBillCode().setText("Code: " + listBills.get(position).getCode().substring(0,15));
         holder.getTxtBillType().setText("Type: " + listBills.get(position).getType());
         holder.getTxtDateExpired().setText("Date Expired: " + listBills.get(position).getExpiredTime());
-        holder.getTxtBillTotal().setText("Total: " + listBills.get(position).getTotal() + " đ");
+        holder.getTxtBillTotal().setText("Total: " + String.format("%,d",listBills.get(position).getTotal()) +  " đ");
     }
 
     @Override

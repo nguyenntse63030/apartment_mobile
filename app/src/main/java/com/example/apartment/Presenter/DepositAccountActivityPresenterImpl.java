@@ -44,7 +44,7 @@ public class DepositAccountActivityPresenterImpl implements DepositAccountActivi
         int account = sharedPreferences.getInt("account",0);
 
         Glide.with(context).asBitmap().load(urlPhoto).into(imgAvatar);
-        editAccount.setText(String.valueOf(account));
+        editAccount.setText(String.format("%,d",account)+" đ");
     }
 
     @Override

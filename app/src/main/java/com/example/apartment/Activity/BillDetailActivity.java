@@ -17,7 +17,7 @@ import com.example.apartment.R;
 
 public class BillDetailActivity extends AppCompatActivity implements BillDetailActivityContract.BillDetailActivityView {
     private TextView txtBillCode,txtType,txtRoomCode,txtRoomNumber,txtApartment,
-            txtCreateDate,txtExpireDate,txtOldNumber,txtNewNumber,txtUsedNumber,txtTotal,txtStatus;
+            txtCreateDate,txtExpireDate,txtOldNumber,txtNewNumber,txtUsedNumber,txtTotal,txtStatus, lbOldNumber,lbNewNumber,lbUsedNumber;
     private Button btnPay;
     private BillDetailActivityContract.BillDetailActivityPresenter presenter;
     @Override
@@ -34,13 +34,16 @@ public class BillDetailActivity extends AppCompatActivity implements BillDetailA
         txtOldNumber = findViewById(R.id.txtOldNumber);
         txtNewNumber = findViewById(R.id.txtNewNumber);
         txtUsedNumber = findViewById(R.id.txtUsedNumber);
+        lbOldNumber = findViewById(R.id.lbOldNumber);
+        lbNewNumber = findViewById(R.id.lbNewNumber);
+        lbUsedNumber = findViewById(R.id.lbUsedNumber);
         txtTotal = findViewById(R.id.txtTotal);
         txtStatus = findViewById(R.id.txtStatus);
         btnPay = findViewById(R.id.btnPay);
         Intent intent = getIntent();
         presenter = new BillDetailActivityPresenterImpl(this);
         presenter.fillData(intent,txtBillCode,txtType,txtRoomCode,txtRoomNumber,txtApartment,
-                txtCreateDate,txtExpireDate,txtOldNumber,txtNewNumber,txtUsedNumber,txtTotal,txtStatus,btnPay,getApplicationContext());
+                txtCreateDate,txtExpireDate,txtOldNumber,txtNewNumber,txtUsedNumber,txtTotal,txtStatus,btnPay,getApplicationContext(), lbOldNumber,lbNewNumber,lbUsedNumber);
 
     }
 
@@ -86,7 +89,7 @@ public class BillDetailActivity extends AppCompatActivity implements BillDetailA
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+        builder.setMessage("Are you sure that you want to pay the bill ?").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();
     }
 }
