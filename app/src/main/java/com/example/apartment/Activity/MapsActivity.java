@@ -61,8 +61,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         presenter = new MapActivityPresenterImpl(mMap,this);
         presenter.viewMap(latLngApartment,placeType);
-        btnQuocCuong.setSelected(true);
-        btnFood.setSelected(true);
+        btnQuocCuong.setChecked(true);
+        btnFood.setChecked(true);
         radioGroupApartment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
