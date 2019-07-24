@@ -41,17 +41,17 @@ public class MapActivityPresenterImpl implements MapActivityContract.MapActivity
 //    }
 
     @Override
-    public void viewMap() {
+    public void viewMap(LatLng latLng, String placeType) {
         mMap.clear();
 //        Location location = getMyLocation();
-        LatLng latLng = new LatLng(10.8529391,106.6273561);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng , 17));
         mMap.addMarker(new MarkerOptions().position(latLng));
         GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-        String url = getUrl(latLng.latitude, latLng.longitude, "food");
+        String url = getUrl(latLng.latitude, latLng.longitude, placeType);
         Object[] DataTransfer = new Object[2];
         DataTransfer[0] = mMap;
         DataTransfer[1] = url;
         getNearbyPlacesData.execute(DataTransfer);
     }
+
 }
