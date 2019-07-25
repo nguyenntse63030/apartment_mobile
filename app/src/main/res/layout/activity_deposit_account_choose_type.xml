@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.DepositAccountChooseTypeActivity">
+    <androidx.percentlayout.widget.PercentRelativeLayout
+        android:id="@+id/headerLayoutPayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/ic_keyboard_arrow_left_white_24dp"
+            android:onClick="clickToBack"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_heightPercent="6%"
+            android:text="Payment"
+            android:textSize="25dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@color/backGroundTaskbar"/>
+
+    </androidx.percentlayout.widget.PercentRelativeLayout>
+    <androidx.percentlayout.widget.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/headerLayoutPayment"
+        android:layout_marginTop="25dp"
+        android:background="@color/white"
+        android:elevation="1dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/visa" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/mastercard" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <RadioButton
+                        android:id="@+id/btnVisa"
+                        android:layout_width="100dp"
+                        android:layout_height="150dp"
+                        android:checked="true"
+                        android:layout_gravity="right"/>
+                    <RadioButton
+                        android:id="@+id/btnMasterCard"
+                        android:layout_width="100dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="right" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+            <Button
+                android:id="@+id/btnChoose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose"
+                android:layout_alignParentBottom="true"
+                app:layout_widthPercent="90%"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/back_ground_button_choose"
+                android:layout_marginBottom="10dp"/>
+
+    </androidx.percentlayout.widget.PercentRelativeLayout>
+</RelativeLayout>

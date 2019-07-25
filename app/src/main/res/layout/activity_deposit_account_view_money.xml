@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.DepositAccountViewMoneyActivity">
+    <androidx.percentlayout.widget.PercentRelativeLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/ic_keyboard_arrow_left_white_24dp"
+            android:onClick="clickToBack"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_heightPercent="6%"
+            android:text="View Account"
+            android:textSize="25dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@color/backGroundTaskbar"/>
+
+    </androidx.percentlayout.widget.PercentRelativeLayout>
+    <androidx.percentlayout.widget.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/headerLayout"
+        android:elevation="2dp">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imgAvatarView"
+            android:layout_marginTop="50dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/album2"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
+            app:riv_border_color="#333333"
+            app:riv_oval="true"
+            app:riv_corner_radius="30dp"
+            app:riv_mutate_background="true"
+            />
+    </androidx.percentlayout.widget.PercentRelativeLayout>
+    <androidx.percentlayout.widget.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/headerLayout"
+        android:layout_marginTop="125dp"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="1dp"
+
+        >
+        <androidx.percentlayout.widget.PercentRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="75dp"
+            android:layout_centerHorizontal="true"
+            app:layout_widthPercent="90%">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_widthPercent="100%"
+                android:layout_margin="4dp"
+                android:hint="Account"
+                android:background="@drawable/border_edittext">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editAccountView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:background="@null"
+                    android:inputType="number"
+                    android:layout_marginBottom="12dp"
+                    android:paddingStart="5dp"
+                    android:drawableStart="@drawable/ic_money"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+            <Button
+                android:id="@+id/btnChoosePayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose Payment"
+                android:layout_alignParentBottom="true"
+                app:layout_widthPercent="90%"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_centerHorizontal="true"
+
+                android:background="@drawable/back_ground_button_update"
+                android:layout_marginBottom="5dp"
+                android:onClick="clickToPayment"
+                />
+
+        </androidx.percentlayout.widget.PercentRelativeLayout>
+
+    </androidx.percentlayout.widget.PercentRelativeLayout>
+</RelativeLayout>

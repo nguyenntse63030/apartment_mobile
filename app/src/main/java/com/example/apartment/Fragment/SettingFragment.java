@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.apartment.Activity.DepositAccountActivity;
+import com.example.apartment.Activity.DepositAccountViewMoneyActivity;
 import com.example.apartment.Activity.LoginActivity;
 import com.example.apartment.Activity.MapsActivity;
 import com.example.apartment.Activity.ProfileActivity;
@@ -49,7 +50,7 @@ public class SettingFragment extends Fragment {
         btnDeposit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), DepositAccountActivity.class);
+                Intent intent = new Intent(getActivity().getApplicationContext(), DepositAccountViewMoneyActivity.class);
                 startActivity(intent);
             }
         });
