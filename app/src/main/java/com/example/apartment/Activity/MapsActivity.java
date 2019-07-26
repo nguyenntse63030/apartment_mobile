@@ -23,7 +23,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private RadioGroup radioGroupType,radioGroupApartment;
     private RadioButton btnFood,btnHospital,btnSchool,btnRestaurant,btnQuocCuong,btnIHome;
     public static final LatLng IHome = new LatLng(10.8350545,106.7974577);
-    public static final  LatLng QuocCuong = new LatLng(10.8529391,106.6273561);
+    public static final  LatLng QuocCuong = new LatLng(10.869500, 106.686694);
     private LatLng latLngApartment=QuocCuong;
     private String placeType = "food";
     private Button btnFind;
